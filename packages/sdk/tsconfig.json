@@ -1,6 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    // TS6 bridge: tsup's dts build injects `baseUrl` into its compiler options,
+    // which TS6 rejects as deprecated (TS5101). Remove once tsup stops injecting
+    // it (tracked with the TS 7 upgrade, DEV-520).
+    "ignoreDeprecations": "6.0",
     "composite": false,
     "declaration": false,
     "declarationMap": false,

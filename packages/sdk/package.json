@@ -48,7 +48,7 @@
     "@typescript/native-preview": "^7.0.0-dev.20260130.1",
     "openapi-typescript": "^7.4.4",
     "tsup": "^8.3.5",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "engines": {
     "node": ">=18"

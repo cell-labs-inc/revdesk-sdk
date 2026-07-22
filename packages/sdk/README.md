@@ -28,7 +28,7 @@ const { data: numbers } = await revdesk.phoneNumbers.list({ limit: 25 });
 await revdesk.calls.dial({ from_number: "+15551230000", to_number: "+15554560000" });
 
 // Send an SMS
-await revdesk.sms.send({ from_number: "+15551230000", to_number: "+15554560000", body: "Hi!" });
+await revdesk.sms.send({ from: "+15551230000", to: "+15554560000", message: "Hi!" });
 ```
 
 ## AI agents
@@ -57,10 +57,10 @@ const { data: call } = await revdesk.agents.webCall(agents[0].id);
 
 ```ts
 new RevDesk({
-  apiKey: "…",                       // required
+  apiKey: "…", // required
   baseUrl: "https://api.revdesk.com", // optional override
-  fetch: customFetch,                 // optional fetch implementation
-  headers: { "X-App": "my-app" },     // optional headers on every request
+  fetch: customFetch, // optional fetch implementation
+  headers: { "X-App": "my-app" }, // optional headers on every request
 });
 ```
 
@@ -86,8 +86,8 @@ Mutating calls accept an `idempotencyKey` so a retried request is processed once
 import { generateIdempotencyKey } from "@revdesk/sdk";
 
 await revdesk.sms.send(
-  { from_number: "+15551230000", to_number: "+15554560000", body: "Hi!" },
-  { idempotencyKey: generateIdempotencyKey() },
+  { from: "+15551230000", to: "+15554560000", message: "Hi!" },
+  { idempotencyKey: generateIdempotencyKey() }
 );
 ```
 

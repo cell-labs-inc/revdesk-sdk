@@ -46,5 +46,4 @@ export interface ListEnvelope<TItem> {
 }
 
 /** The element type of a list operation's `data` array. */
-export type ItemOf<O extends OperationId> =
-  SuccessOf<O> extends { data: ReadonlyArray<infer T> } ? T : never;
+export type ItemOf<O extends OperationId> = SuccessOf<O> extends { data: ReadonlyArray<infer T> } ? T : never;

@@ -65,7 +65,7 @@ export class HttpClient {
   async request<TResponse, TQuery = unknown, TBody = unknown>(
     method: string,
     path: string,
-    init: RequestInitOptions<TQuery, TBody> = {},
+    init: RequestInitOptions<TQuery, TBody> = {}
   ): Promise<TResponse> {
     const headers: Record<string, string> = {
       Authorization: `Bearer ${this.apiKey}`,
@@ -123,10 +123,8 @@ function toRevDeskError(status: number, payload: unknown, requestId?: string): R
  * type is inferred from its return value.
  */
 export async function* paginate<TItem>(
-  fetchPage: (
-    cursor: string | undefined,
-  ) => Promise<{ data: TItem[]; meta?: { cursor?: string } }>,
-  startCursor?: string,
+  fetchPage: (cursor: string | undefined) => Promise<{ data: TItem[]; meta?: { cursor?: string } }>,
+  startCursor?: string
 ): AsyncGenerator<TItem, void, unknown> {
   let cursor = startCursor;
   do {

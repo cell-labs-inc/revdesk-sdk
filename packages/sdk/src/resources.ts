@@ -29,19 +29,14 @@ export class PhoneNumbersResource extends Resource {
 
   /** Search for purchasable phone numbers. */
   search(query: QueryOf<"v1_phone_numbers_search_get">) {
-    return this.http.request<SuccessOf<"v1_phone_numbers_search_get">>(
-      "GET",
-      "/v1/phone-numbers/search",
-      { query },
-    );
+    return this.http.request<SuccessOf<"v1_phone_numbers_search_get">>("GET", "/v1/phone-numbers/search", {
+      query,
+    });
   }
 
   /** Retrieve a single phone number. */
   get(id: string) {
-    return this.http.request<SuccessOf<"v1_phone_numbers_id_get">>(
-      "GET",
-      `/v1/phone-numbers/${enc(id)}`,
-    );
+    return this.http.request<SuccessOf<"v1_phone_numbers_id_get">>("GET", `/v1/phone-numbers/${enc(id)}`);
   }
 
   /** Purchase a phone number. */
@@ -57,7 +52,7 @@ export class PhoneNumbersResource extends Resource {
     return this.http.request<SuccessOf<"v1_phone_numbers_id_patch">>(
       "PATCH",
       `/v1/phone-numbers/${enc(id)}`,
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -66,7 +61,7 @@ export class PhoneNumbersResource extends Resource {
     return this.http.request<SuccessOf<"v1_phone_numbers_id_delete">>(
       "DELETE",
       `/v1/phone-numbers/${enc(id)}`,
-      { ...options },
+      { ...options }
     );
   }
 
@@ -74,7 +69,7 @@ export class PhoneNumbersResource extends Resource {
   cnamStatus(id: string) {
     return this.http.request<SuccessOf<"v1_phone_numbers_id_cnam_status_get">>(
       "GET",
-      `/v1/phone-numbers/${enc(id)}/cnam-status`,
+      `/v1/phone-numbers/${enc(id)}/cnam-status`
     );
   }
 }
@@ -95,11 +90,10 @@ export class CallerIdsResource extends Resource {
 
   /** Update a caller ID. */
   update(id: string, body: RequestBodyOf<"v1_caller_ids_id_patch">, options?: MutationOptions) {
-    return this.http.request<SuccessOf<"v1_caller_ids_id_patch">>(
-      "PATCH",
-      `/v1/caller-ids/${enc(id)}`,
-      { body, ...options },
-    );
+    return this.http.request<SuccessOf<"v1_caller_ids_id_patch">>("PATCH", `/v1/caller-ids/${enc(id)}`, {
+      body,
+      ...options,
+    });
   }
 
   /** Submit the verification code for a caller ID. */
@@ -107,7 +101,7 @@ export class CallerIdsResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_ids_id_verify_post">>(
       "POST",
       `/v1/caller-ids/${enc(id)}/verify`,
-      { body, ...options },
+      { body, ...options }
     );
   }
 }
@@ -138,11 +132,9 @@ export class CallsResource extends Resource {
 
   /** Hang up an in-progress call. */
   hangup(id: string, options?: MutationOptions) {
-    return this.http.request<SuccessOf<"v1_calls_id_hangup_post">>(
-      "POST",
-      `/v1/calls/${enc(id)}/hangup`,
-      { ...options },
-    );
+    return this.http.request<SuccessOf<"v1_calls_id_hangup_post">>("POST", `/v1/calls/${enc(id)}/hangup`, {
+      ...options,
+    });
   }
 }
 
@@ -172,11 +164,10 @@ export class AgentsResource extends Resource {
 
   /** Configure an agent — name, greeting, system prompt, voice, language, enabled. */
   update(id: string, body: RequestBodyOf<"v1_agents_id_patch">, options?: MutationOptions) {
-    return this.http.request<SuccessOf<"v1_agents_id_patch">>(
-      "PATCH",
-      `/v1/agents/${enc(id)}`,
-      { body, ...options },
-    );
+    return this.http.request<SuccessOf<"v1_agents_id_patch">>("PATCH", `/v1/agents/${enc(id)}`, {
+      body,
+      ...options,
+    });
   }
 
   /**
@@ -188,7 +179,7 @@ export class AgentsResource extends Resource {
     return this.http.request<SuccessOf<"v1_agents_id_web_call_post">>(
       "POST",
       `/v1/agents/${enc(id)}/web-call`,
-      { ...options },
+      { ...options }
     );
   }
 }
@@ -211,10 +202,7 @@ export class UsageResource extends Resource {
 
   /** Usage for a single phone number. */
   getForNumber(phoneId: string) {
-    return this.http.request<SuccessOf<"v1_usage_phoneId_get">>(
-      "GET",
-      `/v1/usage/${enc(phoneId)}`,
-    );
+    return this.http.request<SuccessOf<"v1_usage_phoneId_get">>("GET", `/v1/usage/${enc(phoneId)}`);
   }
 }
 
@@ -241,19 +229,15 @@ export class SubEntitiesResource extends Resource {
 
   /** Retrieve a sub-entity. */
   get(id: string) {
-    return this.http.request<SuccessOf<"v1_sub_entities_id_get">>(
-      "GET",
-      `/v1/sub-entities/${enc(id)}`,
-    );
+    return this.http.request<SuccessOf<"v1_sub_entities_id_get">>("GET", `/v1/sub-entities/${enc(id)}`);
   }
 
   /** Update a sub-entity. */
   update(id: string, body: RequestBodyOf<"v1_sub_entities_id_patch">, options?: MutationOptions) {
-    return this.http.request<SuccessOf<"v1_sub_entities_id_patch">>(
-      "PATCH",
-      `/v1/sub-entities/${enc(id)}`,
-      { body, ...options },
-    );
+    return this.http.request<SuccessOf<"v1_sub_entities_id_patch">>("PATCH", `/v1/sub-entities/${enc(id)}`, {
+      body,
+      ...options,
+    });
   }
 }
 
@@ -262,7 +246,7 @@ class ReputationNumbersResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_numbers_get">>(
       "GET",
       "/v1/caller-trust/reputation/numbers",
-      { query: { limit: 50, ...query } },
+      { query: { limit: 50, ...query } }
     );
   }
 
@@ -275,14 +259,14 @@ class ReputationNumbersResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_numbers_post">>(
       "POST",
       "/v1/caller-trust/reputation/numbers",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
   get(phone: string) {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_numbers_phone_get">>(
       "GET",
-      `/v1/caller-trust/reputation/numbers/${enc(phone)}`,
+      `/v1/caller-trust/reputation/numbers/${enc(phone)}`
     );
   }
 
@@ -290,7 +274,7 @@ class ReputationNumbersResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_numbers_phone_delete">>(
       "DELETE",
       `/v1/caller-trust/reputation/numbers/${enc(phone)}`,
-      { ...options },
+      { ...options }
     );
   }
 }
@@ -299,7 +283,7 @@ class EnterpriseResource extends Resource {
   get() {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_get">>(
       "GET",
-      "/v1/caller-trust/enterprise",
+      "/v1/caller-trust/enterprise"
     );
   }
 
@@ -307,7 +291,7 @@ class EnterpriseResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_post">>(
       "POST",
       "/v1/caller-trust/enterprise",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -315,7 +299,7 @@ class EnterpriseResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_delete">>(
       "DELETE",
       "/v1/caller-trust/enterprise",
-      { ...options },
+      { ...options }
     );
   }
 
@@ -323,18 +307,18 @@ class EnterpriseResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_submit_post">>(
       "POST",
       "/v1/caller-trust/enterprise/submit",
-      { ...options },
+      { ...options }
     );
   }
 
   signAndSubmit(
     body: RequestBodyOf<"v1_caller_trust_enterprise_sign_and_submit_post">,
-    options?: MutationOptions,
+    options?: MutationOptions
   ) {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_sign_and_submit_post">>(
       "POST",
       "/v1/caller-trust/enterprise/sign-and-submit",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -342,18 +326,18 @@ class EnterpriseResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_resign_post">>(
       "POST",
       "/v1/caller-trust/enterprise/resign",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
   generateLoa(
     body: RequestBodyOf<"v1_caller_trust_enterprise_generate_loa_post">,
-    options?: MutationOptions,
+    options?: MutationOptions
   ) {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_generate_loa_post">>(
       "POST",
       "/v1/caller-trust/enterprise/generate-loa",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -365,20 +349,16 @@ class EnterpriseResource extends Resource {
   retrieve(id: string) {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_id_get">>(
       "GET",
-      `/v1/caller-trust/enterprise/${enc(id)}`,
+      `/v1/caller-trust/enterprise/${enc(id)}`
     );
   }
 
   /** Update fields on a specific DRAFT enterprise registration. */
-  update(
-    id: string,
-    body: RequestBodyOf<"v1_caller_trust_enterprise_id_patch">,
-    options?: MutationOptions,
-  ) {
+  update(id: string, body: RequestBodyOf<"v1_caller_trust_enterprise_id_patch">, options?: MutationOptions) {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_id_patch">>(
       "PATCH",
       `/v1/caller-trust/enterprise/${enc(id)}`,
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -387,7 +367,7 @@ class EnterpriseResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_id_delete">>(
       "DELETE",
       `/v1/caller-trust/enterprise/${enc(id)}`,
-      { ...options },
+      { ...options }
     );
   }
 
@@ -396,7 +376,7 @@ class EnterpriseResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_id_submit_post">>(
       "POST",
       `/v1/caller-trust/enterprise/${enc(id)}/submit`,
-      { ...options },
+      { ...options }
     );
   }
 
@@ -404,12 +384,12 @@ class EnterpriseResource extends Resource {
   signAndSubmitById(
     id: string,
     body: RequestBodyOf<"v1_caller_trust_enterprise_id_sign_and_submit_post">,
-    options?: MutationOptions,
+    options?: MutationOptions
   ) {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_id_sign_and_submit_post">>(
       "POST",
       `/v1/caller-trust/enterprise/${enc(id)}/sign-and-submit`,
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -417,12 +397,12 @@ class EnterpriseResource extends Resource {
   resignById(
     id: string,
     body: RequestBodyOf<"v1_caller_trust_enterprise_id_resign_post">,
-    options?: MutationOptions,
+    options?: MutationOptions
   ) {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_id_resign_post">>(
       "POST",
       `/v1/caller-trust/enterprise/${enc(id)}/resign`,
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -430,12 +410,12 @@ class EnterpriseResource extends Resource {
   generateLoaById(
     id: string,
     body: RequestBodyOf<"v1_caller_trust_enterprise_id_generate_loa_post">,
-    options?: MutationOptions,
+    options?: MutationOptions
   ) {
     return this.http.request<SuccessOf<"v1_caller_trust_enterprise_id_generate_loa_post">>(
       "POST",
       `/v1/caller-trust/enterprise/${enc(id)}/generate-loa`,
-      { body, ...options },
+      { body, ...options }
     );
   }
 }
@@ -446,18 +426,17 @@ class BrandResource extends Resource {
   }
 
   update(body: RequestBodyOf<"v1_caller_trust_brand_put">, options?: MutationOptions) {
-    return this.http.request<SuccessOf<"v1_caller_trust_brand_put">>(
-      "PUT",
-      "/v1/caller-trust/brand",
-      { body, ...options },
-    );
+    return this.http.request<SuccessOf<"v1_caller_trust_brand_put">>("PUT", "/v1/caller-trust/brand", {
+      body,
+      ...options,
+    });
   }
 
   submit(options?: MutationOptions) {
     return this.http.request<SuccessOf<"v1_caller_trust_brand_submit_post">>(
       "POST",
       "/v1/caller-trust/brand/submit",
-      { ...options },
+      { ...options }
     );
   }
 }
@@ -467,14 +446,14 @@ class DocumentsResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_documents_post">>(
       "POST",
       "/v1/caller-trust/documents",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
   get(id: string) {
     return this.http.request<SuccessOf<"v1_caller_trust_documents_id_get">>(
       "GET",
-      `/v1/caller-trust/documents/${enc(id)}`,
+      `/v1/caller-trust/documents/${enc(id)}`
     );
   }
 }
@@ -492,7 +471,7 @@ class ReputationResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_get">>(
       "GET",
       "/v1/caller-trust/reputation",
-      { query },
+      { query }
     );
   }
 
@@ -500,7 +479,7 @@ class ReputationResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_post">>(
       "POST",
       "/v1/caller-trust/reputation",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -508,7 +487,7 @@ class ReputationResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_patch">>(
       "PATCH",
       "/v1/caller-trust/reputation",
-      { body, ...options },
+      { body, ...options }
     );
   }
 
@@ -516,7 +495,7 @@ class ReputationResource extends Resource {
     return this.http.request<SuccessOf<"v1_caller_trust_reputation_delete">>(
       "DELETE",
       "/v1/caller-trust/reputation",
-      { ...options },
+      { ...options }
     );
   }
 }

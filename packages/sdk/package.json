@@ -42,7 +42,7 @@
     "build": "tsup",
     "clean": "rm -rf dist .turbo",
     "gen:types": "openapi-typescript ../../apps/docs/openapi.json -o src/generated/openapi.ts",
-    "type-check": "tsgo --noEmit"
+    "type-check": "bash ../../scripts/dev/type-check.sh tsgo --noEmit"
   },
   "devDependencies": {
     "@typescript/native-preview": "^7.0.0-dev.20260130.1",

@@ -111,6 +111,7 @@ function toRevDeskError(status: number, payload: unknown, requestId?: string): R
     code: envelope?.code ?? `http_${status}`,
     message: envelope?.message ?? `RevDesk API request failed with status ${status}.`,
     category: envelope?.category,
+    resolutionHint: envelope?.resolution_hint,
     fields: envelope?.fields,
     docUrl: envelope?.doc_url,
     requestId,

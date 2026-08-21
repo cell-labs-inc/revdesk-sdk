@@ -4,6 +4,7 @@ export interface ErrorEnvelope {
     code: string;
     category?: string;
     message: string;
+    resolution_hint?: string;
     fields?: Record<string, string>;
     doc_url?: string;
   };
@@ -14,6 +15,7 @@ export interface RevDeskErrorInit {
   message: string;
   status: number;
   category?: string;
+  resolutionHint?: string;
   fields?: Record<string, string>;
   docUrl?: string;
   requestId?: string;
@@ -33,6 +35,8 @@ export class RevDeskError extends Error {
   readonly category?: string;
   /** Per-field validation messages, when present. */
   readonly fields?: Record<string, string>;
+  /** Short, actionable recovery guidance supplied by the API. */
+  readonly resolutionHint?: string;
   /** Link to the relevant documentation, when present. */
   readonly docUrl?: string;
   /** Server request id, echoed for support/debugging when present. */
@@ -44,6 +48,7 @@ export class RevDeskError extends Error {
     this.code = init.code;
     this.status = init.status;
     this.category = init.category;
+    this.resolutionHint = init.resolutionHint;
     this.fields = init.fields;
     this.docUrl = init.docUrl;
     this.requestId = init.requestId;

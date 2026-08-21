@@ -42,10 +42,14 @@
     "build": "tsup",
     "clean": "rm -rf dist .turbo",
     "gen:types": "openapi-typescript ../../apps/docs/openapi.json -o src/generated/openapi.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "type-check": "bash ../../scripts/dev/type-check.sh tsgo --noEmit"
   },
   "devDependencies": {
+    "@revdesk/eslint-config": "workspace:*",
     "@typescript/native-preview": "^7.0.0-dev.20260130.1",
+    "eslint": "10.8.1",
     "openapi-typescript": "^7.4.4",
     "tsup": "^8.3.5",
     "typescript": "6.0.3"

@@ -42,7 +42,7 @@
     "build": "tsdown",
     "clean": "rm -rf dist .turbo",
     "gen:types": "bash ./scripts/gen-openapi-types.sh",
-    "type-check": "bash ../../scripts/dev/type-check.sh tsc --noEmit"
+    "type-check": "bash ./scripts/type-check.sh"
   },
   "devDependencies": {
     "tsdown": "0.22.14",

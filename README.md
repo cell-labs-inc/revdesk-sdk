@@ -44,6 +44,9 @@ bun run type-check
 
 The REST types are generated from RevDesk's OpenAPI spec.
 
+Releases are published to npm from this public repository with GitHub OIDC trusted publishing and
+automatic provenance; no long-lived npm publish token is stored in GitHub.
+
 ## License
 
 [MIT](./LICENSE) © Cell Labs, Inc.

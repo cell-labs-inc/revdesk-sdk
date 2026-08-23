@@ -17,7 +17,7 @@ generator_dir="$(mktemp -d "${TMPDIR:-/tmp}/revdesk-openapi-types.XXXXXX")"
 trap 'rm -rf "$generator_dir"' EXIT
 
 cd "$generator_dir"
-npm exec --yes \
+bunx \
   --package=typescript@5.9.3 \
   --package=openapi-typescript@7.13.0 \
-  -- openapi-typescript "$schema_source" -o "$package_dir/src/generated/openapi.ts"
+  openapi-typescript "$schema_source" -o "$package_dir/src/generated/openapi.ts"

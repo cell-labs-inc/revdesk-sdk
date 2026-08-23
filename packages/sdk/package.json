@@ -6,7 +6,7 @@
   "homepage": "https://docs.revdesk.com/api-reference/sdks",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cell-labs-inc/revdesk-sdk",
+    "url": "git+https://github.com/cell-labs-inc/revdesk-sdk.git",
     "directory": "packages/sdk"
   },
   "keywords": [
@@ -35,7 +35,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "revdesk": "./dist/cli.js"
+    "revdesk": "dist/cli.js"
   },
   "publishConfig": {
     "access": "public",

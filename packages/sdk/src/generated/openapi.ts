@@ -4,7100 +4,9588 @@
  */
 
 export interface paths {
-  "/v1/me": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/account": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Account snapshot
+         * @description The organization's account snapshot: plan tier and phone-number + caller-trust footprint counts. For the authenticated user and the key's scopes, use GET /v1/me.
+         */
+        get: operations["v1_account_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Current identity
-     * @description The identity behind the API key: the user, their organization, and the scopes the key carries. For the organization's plan and footprint, use GET /v1/account.
-     */
-    get: operations["v1_me_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/account": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/agents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List AI agents
+         * @description Returns every AI agent in the caller's active organization — the agents that answer inbound calls and power outbound campaigns. Use an agent's `id` as `agent_id` on POST /v1/calls or POST /v1/room-token.
+         */
+        get: operations["v1_agents_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Account snapshot
-     * @description The organization's account snapshot: plan tier and phone-number + caller-trust footprint counts. For the authenticated user and the key's scopes, use GET /v1/me.
-     */
-    get: operations["v1_account_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/usage": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/agents/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get an AI agent
+         * @description Fetch a single AI agent by id, including its system prompt.
+         */
+        get: operations["v1_agents_id_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Configure an AI agent
+         * @description Update an agent's name, greeting, system prompt, voice, language, or enabled state. Changes are synced to the voice runtime so the next call uses them. Send only the fields you want to change.
+         */
+        patch: operations["v1_agents_id_patch"];
+        trace?: never;
     };
-    /**
-     * Current-month usage rollup
-     * @description Aggregated counts across all numbers the key can see: outbound calls, minutes used, and spam-risk distribution across enrolled numbers.
-     */
-    get: operations["v1_usage_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/sub-entities": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/agents/{id}/web-call": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Start a browser call with an AI agent
+         * @description Dispatches the agent into a room and returns a browser join token. Hand the token and room_url to @revdesk/webrtc (RevDeskRoom) and talk to the agent in the browser — no phone number needed.
+         */
+        post: operations["v1_agents_id_web_call_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List sub-entities under the caller's umbrella organization
-     * @description Every managed child organization (sub-entity) of the authenticated org. Each entry includes member + phone-number counts so the caller can tell which sub-entities are live.
-     */
-    get: operations["v1_sub_entities_get"];
-    put?: never;
-    /**
-     * Create a sub-entity under the caller's umbrella organization
-     * @description Creates a new managed child organization. When the key carries a user, that user becomes the owner. HIPAA is opt-in per sub-entity via PATCH, so the new sub-entity starts HIPAA-disabled.
-     */
-    post: operations["v1_sub_entities_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/sub-entities/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/appointments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List appointments
+         * @description Returns recent appointments (bookings) for the authenticated organization, newest first.
+         */
+        get: operations["v1_appointments_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Retrieve a sub-entity */
-    get: operations["v1_sub_entities_id_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    /**
-     * Update a sub-entity
-     * @description Rename or flip the `hipaa_enabled` flag. Flipping `hipaa_enabled=false` on an org with enrolled reputation numbers that require BAA coverage will surface a warning but succeed — audit the downstream state after.
-     */
-    patch: operations["v1_sub_entities_id_patch"];
-    trace?: never;
-  };
-  "/v1/phone-numbers": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-ids/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Revoke a caller ID
+         * @description Revokes a verified caller ID so it can no longer be used as an outbound caller ID. The record is kept (status REVOKED, active false) so historical calls stay attributed; it still appears in GET /v1/caller-ids with active=false. Re-verify the number to use it again.
+         */
+        delete: operations["v1_caller_ids_id_delete"];
+        options?: never;
+        head?: never;
+        /**
+         * Update CNAM display name
+         * @description Sets the CNAM display name for a verified caller ID. If the caller ID's phone number is also a carrier-provisioned phone, the CNAM update is pushed to the carrier.
+         */
+        patch: operations["v1_caller_ids_id_patch"];
+        trace?: never;
     };
-    /**
-     * List owned phone numbers
-     * @description Returns every Phone row owned by the caller's active organization.
-     */
-    get: operations["v1_phone_numbers_get"];
-    put?: never;
-    /**
-     * Purchase a new phone number
-     * @description Initiates the durable provisioning workflow. Returns 202 with a workflow run id — poll `/v1/phone-numbers/{phone_record_id}` to see when the number goes active. The new number attaches to the caller's active organization.
-     */
-    post: operations["v1_phone_numbers_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/phone-numbers/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-ids/{id}/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Submit verification code
+         * @description Submits the verification code received during the caller ID verification call. On success the caller ID status changes to VERIFIED.
+         */
+        post: operations["v1_caller_ids_id_verify_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Retrieve a phone number
-     * @description Polls for status. While provisioning is in flight, `is_active=false` and `phone_number` is a `pending:…` placeholder. Once the workflow completes, both fields update atomically.
-     */
-    get: operations["v1_phone_numbers_id_get"];
-    put?: never;
-    post?: never;
-    /**
-     * Release a phone number
-     * @description Releases the phone number from the carrier, cancels the Stripe subscription line item, deletes associated call data and recordings, and removes the database record.
-     */
-    delete: operations["v1_phone_numbers_id_delete"];
-    options?: never;
-    head?: never;
-    /**
-     * Update a phone number's settings
-     * @description Mutates name + recording flags + CNAM display name. CNAM is the caller-ID name shown on outbound calls (max 15 chars, US local numbers only). Setting `cnam_display_name` updates the carrier on the spot — propagation to carriers takes 24-72h.
-     */
-    patch: operations["v1_phone_numbers_id_patch"];
-    trace?: never;
-  };
-  "/v1/phone-numbers/search": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-ids": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List caller IDs
+         * @description Returns all caller IDs for the authenticated team, including verification status and CNAM details.
+         */
+        get: operations["v1_caller_ids_get"];
+        put?: never;
+        /**
+         * Start caller ID verification
+         * @description Initiates a call-based verification for the given phone number. The carrier calls the number and reads a verification code aloud to whoever answers. The code is held by the carrier and is never returned by this API — proving possession of the number is the point. Submit the code the owner heard via POST /v1/caller-ids/{id}/verify.
+         */
+        post: operations["v1_caller_ids_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Search available phone numbers
-     * @description Query carrier inventory for numbers matching the given filters. Returns up to 50 results per call.
-     */
-    get: operations["v1_phone_numbers_search_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/calls": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/brand": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve the caller's Display Identity Record (brand)
+         * @description Returns the display name, logo, call reasons, and vetting state shown on branded calls.
+         */
+        get: operations["v1_caller_trust_brand_get"];
+        /**
+         * Save (or update) the Display Identity Record draft
+         * @description Persists the brand (display name, call reasons, authorizer) against the caller's enterprise and mirrors it to the carrier while the DIR is editable. Requires the Branded Calling add-on. Submit for vetting via `POST /v1/caller-trust/brand/submit`.
+         */
+        put: operations["v1_caller_trust_brand_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List calls
-     * @description Returns recent calls for the authenticated organization, newest first.
-     */
-    get: operations["v1_calls_get"];
-    put?: never;
-    /**
-     * Place an outbound AI call
-     * @description Dispatches a single-leg outbound AI call to the destination. The agent (assistantId, or your most recently created agent) joins over the network and speaks, so the call uses one channel. For a human dial-bridge call from a specific number, use POST /v1/calls/dial.
-     */
-    post: operations["v1_calls_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/calls/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/brand/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Submit the brand profile for vetting
+         * @description Submits the Display Identity Record to the carrier for vetting. Requires the Branded Calling add-on, a complete brand (display name, call reasons, logo), and a verified authorizer email.
+         */
+        post: operations["v1_caller_trust_brand_submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Retrieve a single call
-     * @description Returns metadata for the call. When a recording is available, `recording_url` is populated.
-     */
-    get: operations["v1_calls_id_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/calls/{id}/hangup": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/documents/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get document status
+         * @description Returns metadata for a previously uploaded document, including its verification status and antivirus scan status.
+         */
+        get: operations["v1_caller_trust_documents_id_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Hang up a call
-     * @description Ends an in-progress call by tearing down its media room. Idempotent — hanging up an already-ended call returns success.
-     */
-    post: operations["v1_calls_id_hangup_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/calls/dial": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/documents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Upload a document (e.g. signed LOA)
+         * @description Uploads a base64-encoded PDF to the carrier's document API. Returns a document ID that can be passed to the reputation enable endpoint. Documents expire after 30 minutes if not linked to a service — upload immediately before enabling reputation.
+         */
+        post: operations["v1_caller_trust_documents_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Bridge two phone numbers (from_number ↔ destination)
-     * @description Bridges two phone numbers into one call — your from_number and the destination. Because it rings two phones, it uses TWO concurrent channels. Pass connect_number to ring a separate phone for the human leg (e.g. an agent's own cell) while the destination still sees from_number; the connect_number is never shown to the destination. For 1-channel calls, use POST /v1/calls (AI outbound — the agent joins over the network) or the WebRTC token flow (a human joins in the browser). Returns immediately with call_id; poll GET /v1/calls/{id} or subscribe to webhooks for status. Demo keys must target an allowlisted destination.
-     */
-    post: operations["v1_calls_dial_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/agents": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/{id}/generate-loa": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate LOA PDF for hand-signing (by ID)
+         * @description Generates a Letter of Authorization PDF pre-filled with enterprise data and a blank hand-signature line. Enterprise must have been submitted to the carrier first (has carrier_enterprise_id). Addresses a specific registration by ID.
+         */
+        post: operations["v1_caller_trust_enterprise_id_generate_loa_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List AI agents
-     * @description Returns every AI agent in the caller's active organization — the agents that answer inbound calls and power outbound campaigns. Use an agent's `id` as `agent_id` on POST /v1/calls or POST /v1/room-token.
-     */
-    get: operations["v1_agents_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/agents/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/{id}/resign": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Re-sign the LOA for an enterprise (by ID)
+         * @description Use when the on-file LOA needs to be replaced. Replaces the LOA with the carrier; the old LoaSignature row is preserved for audit. Status resets to PENDING_VETTING. Addresses a specific registration by ID.
+         */
+        post: operations["v1_caller_trust_enterprise_id_resign_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get an AI agent
-     * @description Fetch a single AI agent by id, including its system prompt.
-     */
-    get: operations["v1_agents_id_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    /**
-     * Configure an AI agent
-     * @description Update an agent's name, greeting, system prompt, voice, language, or enabled state. Changes are synced to the voice runtime so the next call uses them. Send only the fields you want to change.
-     */
-    patch: operations["v1_agents_id_patch"];
-    trace?: never;
-  };
-  "/v1/agents/{id}/web-call": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get an enterprise registration by ID
+         * @description Returns a specific enterprise registration by its ID.
+         */
+        get: operations["v1_caller_trust_enterprise_id_get"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete an enterprise registration by ID
+         * @description Deletes a specific enterprise registration. DRAFT records that were never submitted to the carrier are removed directly. Active records are torn down with the carrier and marked DELETED locally.
+         */
+        delete: operations["v1_caller_trust_enterprise_id_delete"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a DRAFT enterprise registration
+         * @description Updates fields on a DRAFT enterprise. Rejects updates to enterprises that have left DRAFT status.
+         */
+        patch: operations["v1_caller_trust_enterprise_id_patch"];
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Start a browser call with an AI agent
-     * @description Dispatches the agent into a room and returns a browser join token. Hand the token and room_url to @revdesk/webrtc (RevDeskRoom) and talk to the agent in the browser — no phone number needed.
-     */
-    post: operations["v1_agents_id_web_call_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/{id}/sign-and-submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sign LOA + submit enterprise to carrier (by ID)
+         * @description DRAFT -> PENDING_VETTING in one call. Generates + signs the LOA PDF, uploads it to the carrier, creates the carrier enterprise record, and enables Number Reputation for it. Addresses a specific registration by ID.
+         */
+        post: operations["v1_caller_trust_enterprise_id_sign_and_submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get the caller's enterprise registration
-     * @description Returns the own-brand enterprise record if one has been registered, or null otherwise.
-     */
-    get: operations["v1_caller_trust_enterprise_get"];
-    put?: never;
-    /**
-     * Create or update the caller's enterprise registration draft
-     * @description Idempotent upsert of the own-brand enterprise registration as DRAFT. No carrier-side calls are made here — submission to the carrier happens in a separate sign-and-submit step.
-     */
-    post: operations["v1_caller_trust_enterprise_post"];
-    /**
-     * Delete the caller's enterprise registration
-     * @description Deletes the own-brand enterprise registration. DRAFT records that were never submitted to the carrier are removed directly. Active records are torn down with the carrier (enterprise + reputation) and marked DELETED locally.
-     */
-    delete: operations["v1_caller_trust_enterprise_delete"];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/submit": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/{id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Submit enterprise to the carrier (by ID)
+         * @description Accepts Number Reputation Terms of Service and creates the enterprise with the carrier. Does NOT sign an LOA or enable reputation — those are separate steps. Addresses a specific registration by ID.
+         */
+        post: operations["v1_caller_trust_enterprise_id_submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Submit enterprise to the carrier
-     * @description Accepts Number Reputation Terms of Service and creates the enterprise with the carrier. Does NOT sign an LOA or enable reputation — those are separate steps.
-     */
-    post: operations["v1_caller_trust_enterprise_submit_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/sign-and-submit": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/generate-loa": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate LOA PDF for hand-signing
+         * @description Generates a Letter of Authorization PDF pre-filled with enterprise data and a blank hand-signature line. Enterprise must have been submitted to the carrier first (has carrier_enterprise_id).
+         */
+        post: operations["v1_caller_trust_enterprise_generate_loa_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Sign LOA + submit enterprise to carrier
-     * @description DRAFT -> PENDING_VETTING in one call. Generates + signs the LOA PDF, uploads it to the carrier, creates the carrier enterprise record, and enables Number Reputation for it.
-     */
-    post: operations["v1_caller_trust_enterprise_sign_and_submit_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/resign": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/resign": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Re-sign the LOA for an enterprise
+         * @description Use when the on-file LOA needs to be replaced. Replaces the LOA with the carrier; the old LoaSignature row is preserved for audit. Status resets to PENDING_VETTING.
+         */
+        post: operations["v1_caller_trust_enterprise_resign_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Re-sign the LOA for an enterprise
-     * @description Use when the on-file LOA needs to be replaced. Replaces the LOA with the carrier; the old LoaSignature row is preserved for audit. Status resets to PENDING_VETTING.
-     */
-    post: operations["v1_caller_trust_enterprise_resign_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/generate-loa": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get the caller's enterprise registration
+         * @description Returns the own-brand enterprise record if one has been registered, or null otherwise.
+         */
+        get: operations["v1_caller_trust_enterprise_get"];
+        put?: never;
+        /**
+         * Create or update the caller's enterprise registration draft
+         * @description Idempotent upsert of the own-brand enterprise registration as DRAFT. No carrier-side calls are made here — submission to the carrier happens in a separate sign-and-submit step.
+         */
+        post: operations["v1_caller_trust_enterprise_post"];
+        /**
+         * Delete the caller's enterprise registration
+         * @description Deletes the own-brand enterprise registration. DRAFT records that were never submitted to the carrier are removed directly. Active records are torn down with the carrier (enterprise + reputation) and marked DELETED locally.
+         */
+        delete: operations["v1_caller_trust_enterprise_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Generate LOA PDF for hand-signing
-     * @description Generates a Letter of Authorization PDF pre-filled with enterprise data and a blank hand-signature line. Enterprise must have been submitted to the carrier first (has carrier_enterprise_id).
-     */
-    post: operations["v1_caller_trust_enterprise_generate_loa_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/sign-and-submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sign LOA + submit enterprise to carrier
+         * @description DRAFT -> PENDING_VETTING in one call. Generates + signs the LOA PDF, uploads it to the carrier, creates the carrier enterprise record, and enables Number Reputation for it.
+         */
+        post: operations["v1_caller_trust_enterprise_sign_and_submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get an enterprise registration by ID
-     * @description Returns a specific enterprise registration by its ID.
-     */
-    get: operations["v1_caller_trust_enterprise_id_get"];
-    put?: never;
-    post?: never;
-    /**
-     * Delete an enterprise registration by ID
-     * @description Deletes a specific enterprise registration. DRAFT records that were never submitted to the carrier are removed directly. Active records are torn down with the carrier and marked DELETED locally.
-     */
-    delete: operations["v1_caller_trust_enterprise_id_delete"];
-    options?: never;
-    head?: never;
-    /**
-     * Update a DRAFT enterprise registration
-     * @description Updates fields on a DRAFT enterprise. Rejects updates to enterprises that have left DRAFT status.
-     */
-    patch: operations["v1_caller_trust_enterprise_id_patch"];
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/{id}/submit": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/enterprise/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Submit enterprise to the carrier
+         * @description Accepts Number Reputation Terms of Service and creates the enterprise with the carrier. Does NOT sign an LOA or enable reputation — those are separate steps.
+         */
+        post: operations["v1_caller_trust_enterprise_submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Submit enterprise to the carrier (by ID)
-     * @description Accepts Number Reputation Terms of Service and creates the enterprise with the carrier. Does NOT sign an LOA or enable reputation — those are separate steps. Addresses a specific registration by ID.
-     */
-    post: operations["v1_caller_trust_enterprise_id_submit_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/{id}/sign-and-submit": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/registration-profile": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get the workspace's Free Caller Registry registration profile
+         * @description Returns the workspace's default call purpose and monthly call-volume bracket submitted to the Free Caller Registry, the effective values in use today, and the full lists of valid options.
+         */
+        get: operations["v1_caller_trust_registration_profile_get"];
+        /**
+         * Set the workspace's Free Caller Registry registration profile
+         * @description Sets the default call purpose and monthly call-volume bracket for Free Caller Registry submissions. call_purpose and monthly_call_volume must be option values from GET (call_purpose_options / monthly_call_volume_options).
+         */
+        put: operations["v1_caller_trust_registration_profile_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Sign LOA + submit enterprise to carrier (by ID)
-     * @description DRAFT -> PENDING_VETTING in one call. Generates + signs the LOA PDF, uploads it to the carrier, creates the carrier enterprise record, and enables Number Reputation for it. Addresses a specific registration by ID.
-     */
-    post: operations["v1_caller_trust_enterprise_id_sign_and_submit_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/{id}/resign": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/reputation/numbers/{phone}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get reputation scores for a phone number
+         * @description Returns Hiya-sourced spam risk + 0-100 component scores. Passing `fresh=true` forces a live carrier query billed at $0.25 to your wallet (rate-limited to 1/day/number). Cached reads are free — the weekly scheduled check keeps them warm.
+         */
+        get: operations["v1_caller_trust_reputation_numbers_phone_get"];
+        put?: never;
+        post?: never;
+        /**
+         * Disenroll a phone number from reputation monitoring
+         * @description Removes a phone number from carrier number-reputation monitoring. The number must be currently enrolled. Cached reputation scores are deleted.
+         */
+        delete: operations["v1_caller_trust_reputation_numbers_phone_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Re-sign the LOA for an enterprise (by ID)
-     * @description Use when the on-file LOA needs to be replaced. Replaces the LOA with the carrier; the old LoaSignature row is preserved for audit. Status resets to PENDING_VETTING. Addresses a specific registration by ID.
-     */
-    post: operations["v1_caller_trust_enterprise_id_resign_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/enterprise/{id}/generate-loa": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/reputation/numbers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List reputation scores for every enrolled number
+         * @description Returns per-phone spam risk + component scores for every number the caller owns that's enrolled under an enterprise (either umbrella or own-brand).
+         */
+        get: operations["v1_caller_trust_reputation_numbers_get"];
+        put?: never;
+        /**
+         * Enroll phone numbers in reputation monitoring
+         * @description Enrolls one or more phone numbers in carrier number-reputation monitoring. Numbers must belong to the caller and be in US E.164 format. Enrollment is idempotent — re-enrolling an already-enrolled number is a no-op.
+         */
+        post: operations["v1_caller_trust_reputation_numbers_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Generate LOA PDF for hand-signing (by ID)
-     * @description Generates a Letter of Authorization PDF pre-filled with enterprise data and a blank hand-signature line. Enterprise must have been submitted to the carrier first (has carrier_enterprise_id). Addresses a specific registration by ID.
-     */
-    post: operations["v1_caller_trust_enterprise_id_generate_loa_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/documents": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/reputation/remediations/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get a remediation request
+         * @description Status and per-number outcomes for one remediation request. Outcomes are null until processing completes (usually a few days). Possible outcomes: remediated, not_flagged, requires_review, ineligible, refused.
+         */
+        get: operations["v1_caller_trust_reputation_remediations_id_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Upload a document (e.g. signed LOA)
-     * @description Uploads a base64-encoded PDF to the carrier's document API. Returns a document ID that can be passed to the reputation enable endpoint. Documents expire after 30 minutes if not linked to a service — upload immediately before enabling reputation.
-     */
-    post: operations["v1_caller_trust_documents_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/documents/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/reputation/remediations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List remediation requests
+         * @description Every remediation request that includes at least one of your numbers, newest first. Use GET /remediations/{id} for per-number outcomes.
+         */
+        get: operations["v1_caller_trust_reputation_remediations_get"];
+        put?: never;
+        /**
+         * Submit numbers for spam-label remediation
+         * @description Asks the carrier analytics providers to clear spam/scam-likely labels on the given numbers. Billed $2 per number to your wallet once accepted, regardless of outcome. Limit: one remediation per number per 14 days. Numbers must be enrolled in reputation monitoring. Async — poll GET /remediations/{id} or subscribe to the reputation.remediation_completed webhook.
+         */
+        post: operations["v1_caller_trust_reputation_remediations_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get document status
-     * @description Returns metadata for a previously uploaded document, including its verification status and antivirus scan status.
-     */
-    get: operations["v1_caller_trust_documents_id_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/reputation": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/caller-trust/reputation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Number Reputation enrollment settings
+         * @description Number reputation monitoring is included for every number under RevDesk's shared umbrella. This returns per-enterprise settings (status + check frequency) only for own-brand registrations; it returns null when the caller's numbers are on the shared umbrella (the default), which is not an error.
+         */
+        get: operations["v1_caller_trust_reputation_get"];
+        put?: never;
+        /**
+         * Enable Number Reputation monitoring
+         * @description Enables (or re-enables) enterprise-level reputation monitoring via the carrier's reputation provider. Requires an enterprise that has been submitted to the carrier (has a carrier_enterprise_id) and has an LOA document on file. Idempotent on REJECTED status — calling this after rejection replaces the rejected record with a fresh PENDING one.
+         */
+        post: operations["v1_caller_trust_reputation_post"];
+        /**
+         * Disable Number Reputation monitoring
+         * @description Disables reputation monitoring for the caller's enterprise. Only works when the current status is APPROVED. All enrolled numbers will stop being monitored.
+         */
+        delete: operations["v1_caller_trust_reputation_delete"];
+        options?: never;
+        head?: never;
+        /**
+         * Update reputation check frequency
+         * @description Changes how often the carrier refreshes spam scores for enrolled numbers. Each refresh is billed per number, so this is a cost lever. Only works when reputation status is APPROVED.
+         */
+        patch: operations["v1_caller_trust_reputation_patch"];
+        trace?: never;
     };
-    /**
-     * Get Number Reputation enrollment settings
-     * @description Number reputation monitoring is included for every number under RevDesk's shared umbrella. This returns per-enterprise settings (status + check frequency) only for own-brand registrations; it returns null when the caller's numbers are on the shared umbrella (the default), which is not an error.
-     */
-    get: operations["v1_caller_trust_reputation_get"];
-    put?: never;
-    /**
-     * Enable Number Reputation monitoring
-     * @description Enables (or re-enables) enterprise-level reputation monitoring via the carrier's reputation provider. Requires an enterprise that has been submitted to the carrier (has a carrier_enterprise_id) and has an LOA document on file. Idempotent on REJECTED status — calling this after rejection replaces the rejected record with a fresh PENDING one.
-     */
-    post: operations["v1_caller_trust_reputation_post"];
-    /**
-     * Disable Number Reputation monitoring
-     * @description Disables reputation monitoring for the caller's enterprise. Only works when the current status is APPROVED. All enrolled numbers will stop being monitored.
-     */
-    delete: operations["v1_caller_trust_reputation_delete"];
-    options?: never;
-    head?: never;
-    /**
-     * Update reputation check frequency
-     * @description Changes how often the carrier refreshes spam scores for enrolled numbers. Each refresh is billed per number, so this is a cost lever. Only works when reputation status is APPROVED.
-     */
-    patch: operations["v1_caller_trust_reputation_patch"];
-    trace?: never;
-  };
-  "/v1/caller-trust/reputation/numbers": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/calls/{id}/hangup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hang up a call
+         * @description Ends an in-progress call by tearing down its media room. Idempotent — hanging up an already-ended call returns success.
+         */
+        post: operations["v1_calls_id_hangup_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List reputation scores for every enrolled number
-     * @description Returns per-phone spam risk + component scores for every number the caller owns that's enrolled under an enterprise (either umbrella or own-brand).
-     */
-    get: operations["v1_caller_trust_reputation_numbers_get"];
-    put?: never;
-    /**
-     * Enroll phone numbers in reputation monitoring
-     * @description Enrolls one or more phone numbers in carrier number-reputation monitoring. Numbers must belong to the caller and be in US E.164 format. Enrollment is idempotent — re-enrolling an already-enrolled number is a no-op.
-     */
-    post: operations["v1_caller_trust_reputation_numbers_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/reputation/numbers/{phone}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/calls/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a single call
+         * @description Returns metadata for the call. `has_recording` reflects whether a recording exists, but the actual `recording_url` is only populated when the key also holds the `recordings:read` scope (recording audio is sensitive and gated separately from call metadata).
+         */
+        get: operations["v1_calls_id_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get reputation scores for a phone number
-     * @description Returns Hiya-sourced spam risk + 0-100 component scores. Passing `fresh=true` forces a billed live query (rate-limited to 1/day/number).
-     */
-    get: operations["v1_caller_trust_reputation_numbers_phone_get"];
-    put?: never;
-    post?: never;
-    /**
-     * Disenroll a phone number from reputation monitoring
-     * @description Removes a phone number from carrier number-reputation monitoring. The number must be currently enrolled. Cached reputation scores are deleted.
-     */
-    delete: operations["v1_caller_trust_reputation_numbers_phone_delete"];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/brand": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/calls/{id}/transcript": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a call transcript
+         * @description Returns the flat transcript text plus the speaker-diarized `structured_transcript` turns. Requires the `transcripts:read` scope (transcript content is sensitive and gated separately from call metadata). Organizations whose call-content policy pins content to a compliance (HIPAA) boundary receive `403 content_policy_forbidden`. A call with no stored transcript returns `404 not_found`.
+         */
+        get: operations["v1_calls_id_transcript_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Retrieve the caller's Display Identity Record (brand)
-     * @description Returns the display name, logo, and call reason shown on branded calls. Pre-Branded-Calling-GA, this reflects the local draft state.
-     */
-    get: operations["v1_caller_trust_brand_get"];
-    /**
-     * Save (or update) the Display Identity Record draft
-     * @description Persists the brand display name + call reason against the caller's enterprise. Saved as DRAFT until `POST /v1/caller-trust/brand/submit` flips it to PENDING_SUBMIT (which is then batch-pushed to the carrier by a nightly worker once Branded Calling launches).
-     */
-    put: operations["v1_caller_trust_brand_put"];
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-trust/brand/submit": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/calls/dial": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Bridge two phone numbers (from_number ↔ destination)
+         * @description Bridges two phone numbers into one call — your from_number and the destination. Because it rings two phones, it uses TWO concurrent channels. Pass connect_number to ring a separate phone for the human leg (e.g. an agent's own cell) while the destination still sees from_number; the connect_number is never shown to the destination. For 1-channel calls, use POST /v1/calls (AI outbound — the agent joins over the network) or the WebRTC token flow (a human joins in the browser). Returns immediately with call_id; poll GET /v1/calls/{id} or subscribe to webhooks for status. Demo keys must target an allowlisted destination.
+         */
+        post: operations["v1_calls_dial_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Submit the brand profile for vetting
-     * @description Flips the DIR status to PENDING_SUBMIT. The actual push to the carrier happens via the nightly cron once Branded Calling is enabled. Requires `display_name`, `call_reason`, and `logo_url` to all be set.
-     */
-    post: operations["v1_caller_trust_brand_submit_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-ids": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/calls": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List calls
+         * @description Returns recent calls for the authenticated organization, newest first. Every call reports has_recording, but the actual recording_url is only populated when the key also holds the recordings:read scope; without it the field is null.
+         */
+        get: operations["v1_calls_get"];
+        put?: never;
+        /**
+         * Place an outbound AI call
+         * @description Dispatches a single-leg outbound AI call to the destination. The agent (assistantId, or your most recently created agent) joins over the network and speaks, so the call uses one channel. For a human dial-bridge call from a specific number, use POST /v1/calls/dial.
+         */
+        post: operations["v1_calls_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List caller IDs
-     * @description Returns all caller IDs for the authenticated team, including verification status and CNAM details.
-     */
-    get: operations["v1_caller_ids_get"];
-    put?: never;
-    /**
-     * Start caller ID verification
-     * @description Initiates a call-based verification for the given phone number. The carrier will call the number and read a verification code that must be submitted via POST /v1/caller-ids/{id}/verify.
-     */
-    post: operations["v1_caller_ids_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/caller-ids/{id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/client-tokens": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Mint a bounded client token
+         * @description Issues a short-lived, downscoped token (rdc_…) that is safe to ship into an untrusted client app. The token is restricted to the from_numbers (caller IDs) and to_numbers (destinations) you specify, so it can only place calls within those bounds — never from any number to any number. Present it on the same Authorization: Bearer header in place of your API key; the WebRTC SDK accepts it directly. The token's bounds must fall within this key's own number allowlist and its scopes; it is stateless and revoked by expiry. This endpoint requires a real API key — a minted token cannot mint further tokens. Regardless of the parent key's scopes, a client token may only carry the browser-calling scope (voice:webrtc) — it can never make durable account changes or mint further tokens. An explicit, non-empty to_numbers (destination allowlist) is required so the token can never dial an arbitrary number.
+         */
+        post: operations["v1_client_tokens_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    /**
-     * Update CNAM display name
-     * @description Sets the CNAM display name for a verified caller ID. If the caller ID's phone number is also a carrier-provisioned phone, the CNAM update is pushed to the carrier.
-     */
-    patch: operations["v1_caller_ids_id_patch"];
-    trace?: never;
-  };
-  "/v1/caller-ids/{id}/verify": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/contacts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get a contact
+         * @description Returns a single contact by id.
+         */
+        get: operations["v1_contacts_id_get"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete a contact
+         * @description Permanently deletes a contact. Related records (messages, calls) are removed by database cascade. This cannot be undone.
+         */
+        delete: operations["v1_contacts_id_delete"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a contact
+         * @description Updates a contact's name, email, company, or metadata. Fields omitted from the body are left unchanged; pass null to clear a nullable field. The phone number is immutable — create a new contact instead.
+         */
+        patch: operations["v1_contacts_id_patch"];
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Submit verification code
-     * @description Submits the verification code received during the caller ID verification call. On success the caller ID status changes to VERIFIED.
-     */
-    post: operations["v1_caller_ids_id_verify_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/usage/{phoneId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/contacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List contacts
+         * @description Returns recent contacts for the authenticated organization, newest first.
+         */
+        get: operations["v1_contacts_get"];
+        put?: never;
+        /**
+         * Create or update a contact
+         * @description Upserts a contact by phone number: creates it when no contact with that number exists in the organization, otherwise updates the existing contact's name/email/metadata. The `created` flag in the response tells you which happened (201 on create, 200 on update).
+         */
+        post: operations["v1_contacts_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Per-phone usage
-     * @description Returns voice usage for a specific phone number in the current calendar month. The phone must belong to the authenticated user or team.
-     */
-    get: operations["v1_usage_phoneId_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/webrtc-token": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/jobs/{jobId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a job
+         * @description The job, every band of its provenance timeline in order, and each recorded outcome with the interactions that produced it.
+         */
+        get: operations["v1_jobs_jobId_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Issue a scoped WebRTC calling token
-     * @description Issues a single-use WebRTC token for the RevDesk WebRTC SDK, pinned to one caller ID (from_number, which must be a number you own) and one destination (to_number). The token is an opaque RevDesk token — pass it to the @revdesk/webrtc SDK to place exactly that one call. It is valid only for that single call and is invalidated when the call ends; it cannot be reused. (Token lifetime covers the platform max call duration so it never cuts an active call.)
-     */
-    post: operations["v1_webrtc_token_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/room-token": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/jobs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List jobs
+         * @description Jobs the organization has open or has completed, newest first. Filter with `status` (OPEN, PAUSED, ACHIEVED, ABANDONED, EXPIRED).
+         */
+        get: operations["v1_jobs_get"];
+        put?: never;
+        /**
+         * Create a job
+         * @description Hand RevDesk an outcome to pursue. The agent plans and executes across channels until the success criteria are met, the deadline passes, or the guardrails stop it. Progress and the terminal outcome arrive on the JOB_* webhooks.
+         */
+        post: operations["v1_jobs_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Issue a room-join token for private browser calling
-     * @description Issues a single-call token for browser calling where RevDesk places the call and your browser joins it. You provide a caller ID (from_number, which must be a number you own) and a destination (to_number); RevDesk dials the destination and returns a token your browser uses to join the live call and talk through the mic. Nothing about the underlying network is exposed to the browser. The connection runs entirely on RevDesk's own infrastructure. Pass the returned token and room_url to the RevDesk browser SDK (@revdesk/webrtc) to join.
-     */
-    post: operations["v1_room_token_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/client-tokens": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Current identity
+         * @description The identity behind the API key: the user, their organization, and the scopes the key carries. For the organization's plan and footprint, use GET /v1/account.
+         */
+        get: operations["v1_me_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Mint a bounded client token
-     * @description Issues a short-lived, downscoped token (rdc_…) that is safe to ship into an untrusted client app. The token is restricted to the from_numbers (caller IDs) and to_numbers (destinations) you specify, so it can only place calls within those bounds — never from any number to any number. Present it on the same Authorization: Bearer header in place of your API key; the WebRTC SDK accepts it directly. The token's bounds must fall within this key's own number allowlist and its scopes; it is stateless and revoked by expiry. This endpoint requires a real API key — a minted token cannot mint further tokens.
-     */
-    post: operations["v1_client_tokens_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/phone-numbers/{id}/cnam-status": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/messages/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get an SMS message
+         * @description Returns a single SMS message by id (the id returned from list and send responses).
+         */
+        get: operations["v1_messages_id_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Check live CNAM status
-     * @description Queries the carrier for the current CNAM status. If the carrier reports CNAM as enabled and the database status is still PENDING, it is automatically promoted to APPROVED.
-     */
-    get: operations["v1_phone_numbers_id_cnam_status_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/sms/send": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/messages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List SMS messages
+         * @description Returns recent SMS messages for the authenticated organization, newest first. Direction is derived per message: inbound messages came from the contact's number, outbound messages were sent from one of your numbers.
+         */
+        get: operations["v1_messages_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Send an SMS message
-     * @description Sends an outbound SMS from the specified phone number. The 'from' number must be an active phone number owned by the authenticated organization.
-     */
-    post: operations["v1_sms_send_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/sms/config": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/number-registrations/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get a number registration
+         * @description One registration with its latest submission state and per-engine acknowledgments (hiya, tns, first_orion). A registration is `submitted` once the registry accepts it and `active` after the first engine acknowledges — propagation to carrier spam labeling typically completes within 24–48 hours.
+         */
+        get: operations["v1_number_registrations_id_get"];
+        put?: never;
+        post?: never;
+        /**
+         * Cancel a number registration
+         * @description Stops the monthly charge and RevDesk's tracking for this registration. The Free Caller Registry has no un-register operation, so the number's existing registration with the analytics engines is unaffected — cancellation is a billing and monitoring stop, not a removal. No refund for the current month.
+         */
+        delete: operations["v1_number_registrations_id_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get workspace SMS auto-reply settings
-     * @description Returns the workspace-wide SMS auto-reply configuration. `auto_reply_enabled: false` is one-way SMS — inbound texts are still received, the AI just doesn't auto-respond. Per-number overrides are managed on /v1/phone-numbers/{id}/sms-config.
-     */
-    get: operations["v1_sms_config_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    /**
-     * Update workspace SMS auto-reply settings
-     * @description Updates the workspace-wide SMS auto-reply configuration. Set `auto_reply_enabled: false` for one-way SMS (the AI stops auto-responding to inbound texts).
-     */
-    patch: operations["v1_sms_config_patch"];
-    trace?: never;
-  };
-  "/v1/phone-numbers/{id}/sms-config": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v1/number-registrations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List number registrations
+         * @description Your workspace's Free Caller Registry registrations, oldest first, cursor-paged. Filter by status (pending, submitted, active, failed, cancelled) or an exact phone_number.
+         */
+        get: operations["v1_number_registrations_get"];
+        put?: never;
+        /**
+         * Register phone numbers with the Free Caller Registry
+         * @description Submits US numbers to the Free Caller Registry, which feeds the analytics engines used by T-Mobile, AT&T and Verizon for spam labeling (Hiya, TNS, First Orion). Numbers hosted on RevDesk are included free; bring-your-own numbers bill $5/number per calendar month as a Number Registration line item on your invoice, starting when the registry accepts the submission. Requires an authorization attestation — you must be entitled to register these numbers for the business they belong to. Business identity defaults to your workspace's caller-trust profile; override per-request with business_identity. Async: poll GET /v1/number-registrations or subscribe to registration_submitted / registration_confirmed / registration_failed webhooks. Re-registering an already-live number is free and refreshes it.
+         */
+        post: operations["v1_number_registrations_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get a number's SMS auto-reply override
-     * @description Returns the per-number SMS auto-reply override, if any. When `has_override` is false the number inherits the workspace setting (GET /v1/sms/config).
-     */
-    get: operations["v1_phone_numbers_id_sms_config_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    /**
-     * Set a number's SMS auto-reply override
-     * @description Creates or updates a per-number SMS auto-reply override, taking precedence over the workspace setting. Set `auto_reply_enabled: false` for one-way SMS on this number only.
-     */
-    patch: operations["v1_phone_numbers_id_sms_config_patch"];
-    trace?: never;
-  };
+    "/v1/phone-numbers/{id}/cnam-status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Check live CNAM status
+         * @description Queries the carrier for the current CNAM status. If the carrier reports CNAM as enabled and the database status is still PENDING, it is automatically promoted to APPROVED.
+         */
+        get: operations["v1_phone_numbers_id_cnam_status_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/phone-numbers/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a phone number
+         * @description Polls for status. While provisioning is in flight, `is_active=false` and `phone_number` is a `pending:…` placeholder. Once the workflow completes, both fields update atomically.
+         */
+        get: operations["v1_phone_numbers_id_get"];
+        put?: never;
+        post?: never;
+        /**
+         * Release a phone number
+         * @description Releases the phone number from the carrier, cancels the Stripe subscription line item, deletes associated call data and recordings, and removes the database record.
+         */
+        delete: operations["v1_phone_numbers_id_delete"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a phone number's settings
+         * @description Mutates name + recording flags + CNAM display name. CNAM is the caller-ID name shown on outbound calls (max 15 chars, US local numbers only). Setting `cnam_display_name` updates the carrier on the spot — propagation to carriers takes 24-72h.
+         */
+        patch: operations["v1_phone_numbers_id_patch"];
+        trace?: never;
+    };
+    "/v1/phone-numbers/{id}/sms-config": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get a number's SMS auto-reply override
+         * @description Returns the per-number SMS auto-reply override, if any. When `has_override` is false the number inherits the workspace setting (GET /v1/sms/config).
+         */
+        get: operations["v1_phone_numbers_id_sms_config_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Set a number's SMS auto-reply override
+         * @description Creates or updates a per-number SMS auto-reply override, taking precedence over the workspace setting. Set `auto_reply_enabled: false` for one-way SMS on this number only.
+         */
+        patch: operations["v1_phone_numbers_id_sms_config_patch"];
+        trace?: never;
+    };
+    "/v1/phone-numbers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List owned phone numbers
+         * @description Returns every Phone row owned by the caller's active organization.
+         */
+        get: operations["v1_phone_numbers_get"];
+        put?: never;
+        /**
+         * Purchase a new phone number
+         * @description Initiates the durable provisioning workflow. Returns 202 with a workflow run id — poll `/v1/phone-numbers/{phone_record_id}` to see when the number goes active. The new number attaches to the caller's active organization.
+         */
+        post: operations["v1_phone_numbers_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/phone-numbers/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search available phone numbers
+         * @description Query carrier inventory for numbers matching the given filters. Returns up to 50 results per call.
+         */
+        get: operations["v1_phone_numbers_search_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/room-token": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Issue a room-join token for private browser calling
+         * @description Issues a single-call token for browser calling where RevDesk places the call and your browser joins it. You provide a caller ID (from_number, which must be a number you own) and a destination (to_number); RevDesk dials the destination and returns a token your browser uses to join the live call and talk through the mic. Nothing about the underlying network is exposed to the browser. The connection runs entirely on RevDesk's own infrastructure. Pass the returned token and room_url to the RevDesk browser SDK (@revdesk/webrtc) to join.
+         */
+        post: operations["v1_room_token_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sms/config": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get workspace SMS auto-reply settings
+         * @description Returns the workspace-wide SMS auto-reply configuration. `auto_reply_enabled: false` is one-way SMS — inbound texts are still received, the AI just doesn't auto-respond. Per-number overrides are managed on /v1/phone-numbers/{id}/sms-config.
+         */
+        get: operations["v1_sms_config_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update workspace SMS auto-reply settings
+         * @description Updates the workspace-wide SMS auto-reply configuration. Set `auto_reply_enabled: false` for one-way SMS (the AI stops auto-responding to inbound texts).
+         */
+        patch: operations["v1_sms_config_patch"];
+        trace?: never;
+    };
+    "/v1/sms/send": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Send an SMS message
+         * @description Sends an outbound SMS from the specified phone number. The 'from' number must be an active phone number owned by the authenticated organization.
+         */
+        post: operations["v1_sms_send_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sub-entities/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a sub-entity
+         * @description Retrieve one child organization that the authenticated umbrella organization can administer, including its HIPAA posture and current member and phone-number counts.
+         */
+        get: operations["v1_sub_entities_id_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update a sub-entity
+         * @description Rename or flip the `hipaa_enabled` flag. Changing `hipaa_enabled` requires the `compliance:write` scope IN ADDITION to `sub_entities:write`. HIPAA is fail-closed and non-downgradeable: `hipaa_enabled=false` is REJECTED while the umbrella organization is HIPAA-enabled. Enabling HIPAA defaults the sub-entity's call-recording retention to 30 days (adjustable per number afterward).
+         */
+        patch: operations["v1_sub_entities_id_patch"];
+        trace?: never;
+    };
+    "/v1/sub-entities": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List sub-entities under the caller's umbrella organization
+         * @description Every managed child organization (sub-entity) of the authenticated org. Each entry includes member + phone-number counts so the caller can tell which sub-entities are live.
+         */
+        get: operations["v1_sub_entities_get"];
+        put?: never;
+        /**
+         * Create a sub-entity under the caller's umbrella organization
+         * @description Creates a new managed child organization. When the key carries a user, that user becomes the owner. HIPAA posture is INHERITED from the umbrella (fail-closed): if the umbrella is HIPAA-enabled the new sub-entity starts HIPAA-enabled.
+         */
+        post: operations["v1_sub_entities_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/usage/{phoneId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Per-phone usage
+         * @description Returns voice usage for a specific phone number in the current calendar month. The phone must belong to the authenticated user or team.
+         */
+        get: operations["v1_usage_phoneId_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/usage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Current-month usage rollup
+         * @description Aggregated counts across all numbers the key can see: outbound calls, minutes used, and spam-risk distribution across enrolled numbers.
+         */
+        get: operations["v1_usage_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/webhook_subscriptions/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete a webhook subscription
+         * @description Deletes a webhook subscription. Pending deliveries for it are cancelled.
+         */
+        delete: operations["v1_webhook_subscriptions_id_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/webhook_subscriptions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List webhook subscriptions
+         * @description Returns the webhook subscriptions created through this API for the authenticated organization. Signing secrets are shown once at creation and are never returned here.
+         */
+        get: operations["v1_webhook_subscriptions_get"];
+        put?: never;
+        /**
+         * Create a webhook subscription
+         * @description Subscribes an https URL to an event type (one of: new_call, call_completed, contact_replied, contact_created, new_appointment, number_purchased, number_released, number_updated, call_no_answer, call_voicemail, call_busy, call_failed, sms_sent, sms_delivered, sms_failed, texting_registration_status_changed, registration_submitted, registration_confirmed, registration_failed, job_started, job_progressed, job_outcome_recorded, job_completed). The response includes the HMAC signing secret used for X-RevDesk-Signature — it is shown once, here, and is not retrievable afterwards.
+         */
+        post: operations["v1_webhook_subscriptions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/webrtc-token": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Issue a scoped WebRTC calling token
+         * @description Issues a single-use WebRTC token for the RevDesk WebRTC SDK, pinned to one caller ID (from_number, which must be a number you own) and one destination (to_number). The token is an opaque RevDesk token — pass it to the @revdesk/webrtc SDK to place exactly that one call. It is valid only for that single call and is invalidated when the call ends; it cannot be reused. (Token lifetime covers the platform max call duration so it never cuts an active call.)
+         */
+        post: operations["v1_webrtc_token_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    ErrorEnvelope: {
-      error?: {
-        code: string;
-        message: string;
-        fields?: {
-          [key: string]: string;
+    schemas: {
+        ErrorEnvelope: {
+            error?: {
+                code: string;
+                message: string;
+                resolution_hint?: string;
+                fields?: {
+                    [key: string]: string;
+                };
+                /** Format: uri */
+                doc_url?: string;
+            };
         };
-        /** Format: uri */
-        doc_url?: string;
-      };
     };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  v1_me_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    v1_account_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          "application/json": {
-            data: {
-              api_key_id: string;
-              user: {
-                /** Format: uuid */
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            api_key_id: string;
+                            plan: string;
+                            user: {
+                                /** Format: uuid */
+                                id: string;
+                                email: string;
+                                name: string | null;
+                            } | null;
+                            organization: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                slug: string;
+                            } | null;
+                            footprint: {
+                                phone_numbers: number;
+                                enrolled_reputation_numbers: number;
+                                own_brand_enterprise: boolean;
+                            };
+                            is_demo: boolean;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_agents_get: {
+        parameters: {
+            query: {
+                limit: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            enabled: boolean;
+                            /** @enum {string} */
+                            agent_type: "inbound" | "outbound" | "both" | "unassigned";
+                            greeting: string | null;
+                            language: string | null;
+                            voice_id: string | null;
+                            business_name: string | null;
+                            business_description: string | null;
+                            phone_number: {
+                                id: number;
+                                phone_number: string;
+                                provider: string;
+                                is_active: boolean;
+                            } | null;
+                            created_at: string;
+                            updated_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            page_size: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_agents_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
                 id: string;
-                email: string;
-                name: string | null;
-              } | null;
-              organization: {
-                /** Format: uuid */
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            enabled: boolean;
+                            /** @enum {string} */
+                            agent_type: "inbound" | "outbound" | "both" | "unassigned";
+                            greeting: string | null;
+                            language: string | null;
+                            voice_id: string | null;
+                            business_name: string | null;
+                            business_description: string | null;
+                            system_prompt: string | null;
+                            phone_number: {
+                                id: number;
+                                phone_number: string;
+                                provider: string;
+                                is_active: boolean;
+                            } | null;
+                            created_at: string;
+                            updated_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_agents_id_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
                 id: string;
-                name: string;
-                slug: string;
-              } | null;
-              scopes: string[];
-              is_demo: boolean;
-              demo_expires_at: string | null;
             };
-          };
+            cookie?: never;
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    enabled?: boolean;
+                    greeting?: string | null;
+                    system_prompt?: string | null;
+                    voice_id?: string;
+                    language?: string;
+                };
+            };
         };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            enabled: boolean;
+                            /** @enum {string} */
+                            agent_type: "inbound" | "outbound" | "both" | "unassigned";
+                            greeting: string | null;
+                            language: string | null;
+                            voice_id: string | null;
+                            business_name: string | null;
+                            business_description: string | null;
+                            system_prompt: string | null;
+                            phone_number: {
+                                id: number;
+                                phone_number: string;
+                                provider: string;
+                                is_active: boolean;
+                            } | null;
+                            created_at: string;
+                            updated_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
         };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
-  v1_account_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              api_key_id: string;
-              plan: string;
-              user: {
-                /** Format: uuid */
+    v1_agents_id_web_call_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
                 id: string;
-                email: string;
-                name: string | null;
-              } | null;
-              organization: {
-                /** Format: uuid */
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            token: string;
+                            room_url: string;
+                            room_name: string;
+                            expires_in: number;
+                            /** Format: uuid */
+                            agent_id: string;
+                            ice_servers: unknown[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_appointments_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            title: string;
+                            description: string | null;
+                            contact_name: string | null;
+                            contact_email: string | null;
+                            start_time: string;
+                            end_time: string;
+                            timezone: string | null;
+                            status: string;
+                            event_type: string;
+                            scheduling_option: string | null;
+                            notes: string | null;
+                            created_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            total_results?: number;
+                            page_size?: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_ids_id_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
                 id: string;
-                name: string;
-                slug: string;
-              } | null;
-              footprint: {
-                phone_numbers: number;
-                enrolled_reputation_numbers: number;
-                own_brand_enterprise: boolean;
-              };
-              is_demo: boolean;
             };
-          };
+            cookie?: never;
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_usage_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              period_start: string;
-              period_end: string;
-              calls_placed: number;
-              minutes_used: number;
-              phone_numbers_active: number;
-              spam_risk_distribution: {
-                low: number;
-                medium: number;
-                high: number;
-                unknown: number;
-              };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            caller_id_id: string;
+                            phone_number: string;
+                            status: string;
+                            verified_at: string | null;
+                            certification_method: string | null;
+                            cnam_display_name: string | null;
+                            cnam_status: string | null;
+                            rcd_display_name: string | null;
+                            rcd_status: string | null;
+                            active: boolean;
+                            created_at: string;
+                            updated_at: string;
+                        };
+                    };
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_sub_entities_get: {
-    parameters: {
-      query: {
-        limit: number;
-        cursor?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              /** Format: uuid */
-              id: string;
-              name: string;
-              slug: string | null;
-              /** Format: uuid */
-              parent_organization_id: string;
-              hipaa_enabled: boolean;
-              member_count: number;
-              phone_number_count: number;
-              created_at: string;
-            }[];
-            meta: {
-              cursor?: string;
-              page_size: number;
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_sub_entities_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          name: string;
-          slug?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              /** Format: uuid */
-              id: string;
-              name: string;
-              slug: string | null;
-              /** Format: uuid */
-              parent_organization_id: string;
-              hipaa_enabled: boolean;
-              member_count: number;
-              phone_number_count: number;
-              created_at: string;
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_sub_entities_id_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              /** Format: uuid */
-              id: string;
-              name: string;
-              slug: string | null;
-              /** Format: uuid */
-              parent_organization_id: string;
-              hipaa_enabled: boolean;
-              member_count: number;
-              phone_number_count: number;
-              created_at: string;
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_sub_entities_id_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          name?: string;
-          hipaa_enabled?: boolean;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              /** Format: uuid */
-              id: string;
-              name: string;
-              slug: string | null;
-              /** Format: uuid */
-              parent_organization_id: string;
-              hipaa_enabled: boolean;
-              member_count: number;
-              phone_number_count: number;
-              created_at: string;
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_get: {
-    parameters: {
-      query: {
-        limit: number;
-        cursor?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: number;
-              phone_number: string;
-              name: string | null;
-              organization_id: string | null;
-              user_id: string | null;
-              provider: string;
-              is_active: boolean;
-              iso_country: string;
-              reputation_enrolled_at: string | null;
-              cnam_display_name: string | null;
-              cnam_status: string;
-              texting_enabled: boolean;
-              /** @enum {string} */
-              texting_status: "approved" | "pending" | "rejected" | "not_registered";
-              created_at: string;
-            }[];
-            meta: {
-              cursor?: string;
-              page_size: number;
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          phone_number?: string;
-          area_code?: string;
-          name?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_record_id: number;
-              workflow_run_id: string;
-              status_url: string;
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
-  v1_phone_numbers_id_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: number;
-              phone_number: string;
-              name: string | null;
-              organization_id: string | null;
-              user_id: string | null;
-              provider: string;
-              is_active: boolean;
-              subscription_status: string | null;
-              iso_country: string;
-              reputation_enrolled_at: string | null;
-              created_at: string;
+    v1_caller_ids_id_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_id_delete: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: number;
-              deleted: boolean;
+            path: {
+                id: string;
             };
-          };
+            cookie?: never;
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_id_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          name?: string;
-          cnam_display_name?: string;
-          cnam_enabled?: boolean;
-          recording_enabled?: boolean;
-          transcription_enabled?: boolean;
-          /** Format: uuid */
-          agent_id?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: number;
-              cnam_display_name: string | null;
-              cnam_status: string;
-              name: string | null;
-              recording_enabled: boolean;
-              transcription_enabled: boolean;
-              agent_id: string | null;
+        requestBody: {
+            content: {
+                "application/json": {
+                    cnam_display_name: string;
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_search_get: {
-    parameters: {
-      query: {
-        country: string;
-        area_code?: string;
-        contains?: string;
-        in_region?: string;
-        limit: number;
-        number_type: "local" | "tollFree" | "mobile" | "national";
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_number: string;
-              locality: string;
-              region: string;
-              features: string[];
-            }[];
-            meta: {
-              page_size: number;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            caller_id_id: string;
+                            phone_number: string;
+                            status: string;
+                            verified_at: string | null;
+                            certification_method: string | null;
+                            cnam_display_name: string | null;
+                            cnam_status: string | null;
+                            rcd_display_name: string | null;
+                            rcd_status: string | null;
+                            active: boolean;
+                            created_at: string;
+                            updated_at: string;
+                        };
+                    };
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_calls_get: {
-    parameters: {
-      query?: {
-        limit?: number;
-        status?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              status: string;
-              direction: string;
-              from_number: string;
-              to_number: string;
-              started_at: string | null;
-              ended_at: string | null;
-              duration_seconds: number | null;
-              phone_number_id: string | null;
-              has_recording: boolean;
-              recording_url: string | null;
-              has_transcript: boolean;
-            }[];
-            meta: {
-              cursor?: string;
-              total_results?: number;
-              page_size?: number;
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_calls_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          phoneNumber: string;
-          assistantId?: string;
-          script?: string;
-          name?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              call_id: string;
-              contact_id: string;
-              status: string;
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_calls_id_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              status: string | null;
-              direction: string | null;
-              from_number: string | null;
-              to_number: string | null;
-              started_at: string | null;
-              ended_at: string | null;
-              duration_seconds: number | null;
-              phone_number_id: number | null;
-              organization_id: string | null;
-              user_id: string | null;
-              has_recording: boolean;
-              recording_url: string | null;
-              has_transcript: boolean;
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_calls_id_hangup_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              call_id: string;
-              status: string;
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_calls_dial_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          from_number: string;
-          to_number: string;
-          connect_number?: string;
-          /** @default true */
-          record: boolean;
-          /** @default false */
-          amd: boolean;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              call_id: string;
-              provider_call_sid: string;
-              from_number: string;
-              to_number: string;
-              status: string;
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_agents_get: {
-    parameters: {
-      query: {
-        limit: number;
-        cursor?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              /** Format: uuid */
-              id: string;
-              name: string;
-              enabled: boolean;
-              /** @enum {string} */
-              agent_type: "inbound" | "outbound" | "both" | "unassigned";
-              greeting: string | null;
-              language: string | null;
-              voice_id: string | null;
-              business_name: string | null;
-              business_description: string | null;
-              phone_number: {
-                id: number;
-                phone_number: string;
-                provider: string;
-                is_active: boolean;
-              } | null;
-              created_at: string;
-              updated_at: string;
-            }[];
-            meta: {
-              cursor?: string;
-              page_size: number;
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
-  v1_agents_id_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              /** Format: uuid */
-              id: string;
-              name: string;
-              enabled: boolean;
-              /** @enum {string} */
-              agent_type: "inbound" | "outbound" | "both" | "unassigned";
-              greeting: string | null;
-              language: string | null;
-              voice_id: string | null;
-              business_name: string | null;
-              business_description: string | null;
-              system_prompt: string | null;
-              phone_number: {
-                id: number;
-                phone_number: string;
-                provider: string;
-                is_active: boolean;
-              } | null;
-              created_at: string;
-              updated_at: string;
+    v1_caller_ids_id_verify_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_agents_id_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          name?: string;
-          enabled?: boolean;
-          greeting?: string | null;
-          system_prompt?: string | null;
-          voice_id?: string;
-          language?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              /** Format: uuid */
-              id: string;
-              name: string;
-              enabled: boolean;
-              /** @enum {string} */
-              agent_type: "inbound" | "outbound" | "both" | "unassigned";
-              greeting: string | null;
-              language: string | null;
-              voice_id: string | null;
-              business_name: string | null;
-              business_description: string | null;
-              system_prompt: string | null;
-              phone_number: {
-                id: number;
-                phone_number: string;
-                provider: string;
-                is_active: boolean;
-              } | null;
-              created_at: string;
-              updated_at: string;
+            path: {
+                id: string;
             };
-          };
+            cookie?: never;
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_agents_id_web_call_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              token: string;
-              room_url: string;
-              room_name: string;
-              expires_in: number;
-              /** Format: uuid */
-              agent_id: string;
-              ice_servers: unknown[];
+        requestBody: {
+            content: {
+                "application/json": {
+                    verification_code: string;
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              role_type: string;
-              status: string;
-              rejection_reasons: string[];
-              synced_at: string | null;
-              loa_document_id: string | null;
-              read_only: boolean;
-            } | null;
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          legal_name: string;
-          dba: string;
-          /** @enum {string} */
-          organization_type: "COMMERCIAL" | "GOVERNMENT" | "NON_PROFIT";
-          /** @default US */
-          country_code: string;
-          website: string;
-          fein: string;
-          /** @enum {string} */
-          industry:
-            | "accounting"
-            | "finance"
-            | "billing"
-            | "collections"
-            | "business"
-            | "charity"
-            | "nonprofit"
-            | "communications"
-            | "telecom"
-            | "customer service"
-            | "support"
-            | "delivery"
-            | "shipping"
-            | "logistics"
-            | "education"
-            | "financial"
-            | "banking"
-            | "government"
-            | "public"
-            | "healthcare"
-            | "health"
-            | "pharmacy"
-            | "medical"
-            | "insurance"
-            | "legal"
-            | "law"
-            | "notifications"
-            | "scheduling"
-            | "real estate"
-            | "property"
-            | "retail"
-            | "ecommerce"
-            | "sales"
-            | "marketing"
-            | "software"
-            | "technology"
-            | "tech"
-            | "media"
-            | "surveys"
-            | "market research"
-            | "travel"
-            | "hospitality"
-            | "hotel";
-          /** @enum {string} */
-          jurisdiction_of_incorporation:
-            | "AL"
-            | "AK"
-            | "AZ"
-            | "AR"
-            | "CA"
-            | "CO"
-            | "CT"
-            | "DE"
-            | "DC"
-            | "FL"
-            | "GA"
-            | "HI"
-            | "ID"
-            | "IL"
-            | "IN"
-            | "IA"
-            | "KS"
-            | "KY"
-            | "LA"
-            | "ME"
-            | "MD"
-            | "MA"
-            | "MI"
-            | "MN"
-            | "MS"
-            | "MO"
-            | "MT"
-            | "NE"
-            | "NV"
-            | "NH"
-            | "NJ"
-            | "NM"
-            | "NY"
-            | "NC"
-            | "ND"
-            | "OH"
-            | "OK"
-            | "OR"
-            | "PA"
-            | "RI"
-            | "SC"
-            | "SD"
-            | "TN"
-            | "TX"
-            | "UT"
-            | "VT"
-            | "VA"
-            | "WA"
-            | "WV"
-            | "WI"
-            | "WY"
-            | "AS"
-            | "GU"
-            | "MP"
-            | "PR"
-            | "VI";
-          /** @enum {string} */
-          number_of_employees:
-            | "SIZE_1_10"
-            | "SIZE_11_50"
-            | "SIZE_51_200"
-            | "SIZE_201_500"
-            | "SIZE_501_2000"
-            | "SIZE_2001_10000"
-            | "SIZE_10001_PLUS";
-          /** @enum {string} */
-          organization_legal_type: "CORPORATION" | "LLC" | "PARTNERSHIP" | "NONPROFIT" | "OTHER";
-          organization_contact: {
-            first_name: string;
-            last_name: string;
-            /** Format: email */
-            email: string;
-            job_title: string;
-            phone: string;
-          };
-          billing_contact: {
-            first_name: string;
-            last_name: string;
-            /** Format: email */
-            email: string;
-            phone_number: string;
-          };
-          organization_address: {
-            country: string;
-            administrative_area: string;
-            city: string;
-            postal_code: string;
-            street_address: string;
-            extended_address?: string | null;
-          };
-          billing_address: {
-            country: string;
-            administrative_area: string;
-            city: string;
-            postal_code: string;
-            street_address: string;
-            extended_address?: string | null;
-          };
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              legal_name: string;
-              dba: string;
-              status: string;
-              role_type: string;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            verified: boolean;
+                            message: string;
+                        };
+                    };
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_delete: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              /** @constant */
-              deleted: true;
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_submit_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              status: string;
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_sign_and_submit_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          signer_full_name: string;
-          /** Format: email */
-          signer_email: string;
-          signer_title: string;
-          /** Format: date-time */
-          consent_acknowledged_at: string;
-          /** @constant */
-          confirm_carrier_commit: "I understand this submits to the carrier";
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              status: string;
-              rejection_reasons: string[];
-              synced_at: string | null;
-              loa_document_id: string | null;
-              reputation: {
-                status: string;
-                check_frequency: string;
-                rejection_reasons: string[];
-                last_synced_at: string | null;
-              } | null;
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_resign_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          signer_full_name: string;
-          /** Format: email */
-          signer_email: string;
-          signer_title: string;
-          /** Format: date-time */
-          consent_acknowledged_at: string;
-          /** @constant */
-          confirm_carrier_commit: "I understand this submits to the carrier";
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              status: string;
-              rejection_reasons: string[];
-              synced_at: string | null;
-              loa_document_id: string | null;
-              reputation: {
-                status: string;
-                check_frequency: string;
-                rejection_reasons: string[];
-                last_synced_at: string | null;
-              } | null;
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_generate_loa_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          signer_full_name: string;
-          /** Format: email */
-          signer_email: string;
-          signer_title: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              pdf_base64: string;
-              filename: string;
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_id_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              role_type: string;
-              status: string;
-              rejection_reasons: string[];
-              synced_at: string | null;
-              loa_document_id: string | null;
-              created_at: string;
-              read_only: boolean;
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
-  v1_caller_trust_enterprise_id_delete: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    v1_caller_ids_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              /** @constant */
-              deleted: true;
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            caller_id_id: string;
+                            phone_number: string;
+                            status: string;
+                            verified_at: string | null;
+                            certification_method: string | null;
+                            cnam_display_name: string | null;
+                            cnam_status: string | null;
+                            rcd_display_name: string | null;
+                            rcd_status: string | null;
+                            active: boolean;
+                            created_at: string;
+                            updated_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            total_results?: number;
+                            page_size?: number;
+                        };
+                    };
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_id_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          legal_name?: string;
-          dba?: string;
-          /** @enum {string} */
-          organization_type?: "COMMERCIAL" | "GOVERNMENT" | "NON_PROFIT";
-          country_code?: string;
-          website?: string;
-          fein?: string;
-          /** @enum {string} */
-          industry?:
-            | "accounting"
-            | "finance"
-            | "billing"
-            | "collections"
-            | "business"
-            | "charity"
-            | "nonprofit"
-            | "communications"
-            | "telecom"
-            | "customer service"
-            | "support"
-            | "delivery"
-            | "shipping"
-            | "logistics"
-            | "education"
-            | "financial"
-            | "banking"
-            | "government"
-            | "public"
-            | "healthcare"
-            | "health"
-            | "pharmacy"
-            | "medical"
-            | "insurance"
-            | "legal"
-            | "law"
-            | "notifications"
-            | "scheduling"
-            | "real estate"
-            | "property"
-            | "retail"
-            | "ecommerce"
-            | "sales"
-            | "marketing"
-            | "software"
-            | "technology"
-            | "tech"
-            | "media"
-            | "surveys"
-            | "market research"
-            | "travel"
-            | "hospitality"
-            | "hotel";
-          /** @enum {string} */
-          jurisdiction_of_incorporation?:
-            | "AL"
-            | "AK"
-            | "AZ"
-            | "AR"
-            | "CA"
-            | "CO"
-            | "CT"
-            | "DE"
-            | "DC"
-            | "FL"
-            | "GA"
-            | "HI"
-            | "ID"
-            | "IL"
-            | "IN"
-            | "IA"
-            | "KS"
-            | "KY"
-            | "LA"
-            | "ME"
-            | "MD"
-            | "MA"
-            | "MI"
-            | "MN"
-            | "MS"
-            | "MO"
-            | "MT"
-            | "NE"
-            | "NV"
-            | "NH"
-            | "NJ"
-            | "NM"
-            | "NY"
-            | "NC"
-            | "ND"
-            | "OH"
-            | "OK"
-            | "OR"
-            | "PA"
-            | "RI"
-            | "SC"
-            | "SD"
-            | "TN"
-            | "TX"
-            | "UT"
-            | "VT"
-            | "VA"
-            | "WA"
-            | "WV"
-            | "WI"
-            | "WY"
-            | "AS"
-            | "GU"
-            | "MP"
-            | "PR"
-            | "VI";
-          /** @enum {string} */
-          number_of_employees?:
-            | "SIZE_1_10"
-            | "SIZE_11_50"
-            | "SIZE_51_200"
-            | "SIZE_201_500"
-            | "SIZE_501_2000"
-            | "SIZE_2001_10000"
-            | "SIZE_10001_PLUS";
-          /** @enum {string} */
-          organization_legal_type?: "CORPORATION" | "LLC" | "PARTNERSHIP" | "NONPROFIT" | "OTHER";
-          organization_contact?: {
-            first_name: string;
-            last_name: string;
-            /** Format: email */
-            email: string;
-            job_title: string;
-            phone: string;
-          };
-          billing_contact?: {
-            first_name: string;
-            last_name: string;
-            /** Format: email */
-            email: string;
-            phone_number: string;
-          };
-          organization_address?: {
-            country: string;
-            administrative_area: string;
-            city: string;
-            postal_code: string;
-            street_address: string;
-            extended_address?: string | null;
-          };
-          billing_address?: {
-            country: string;
-            administrative_area: string;
-            city: string;
-            postal_code: string;
-            street_address: string;
-            extended_address?: string | null;
-          };
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              legal_name: string;
-              dba: string;
-              status: string;
-              role_type: string;
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_id_submit_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              status: string;
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_id_sign_and_submit_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          signer_full_name: string;
-          /** Format: email */
-          signer_email: string;
-          signer_title: string;
-          /** Format: date-time */
-          consent_acknowledged_at: string;
-          /** @constant */
-          confirm_carrier_commit: "I understand this submits to the carrier";
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              status: string;
-              rejection_reasons: string[];
-              synced_at: string | null;
-              loa_document_id: string | null;
-              reputation: {
-                status: string;
-                check_frequency: string;
-                rejection_reasons: string[];
-                last_synced_at: string | null;
-              } | null;
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_id_resign_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          signer_full_name: string;
-          /** Format: email */
-          signer_email: string;
-          signer_title: string;
-          /** Format: date-time */
-          consent_acknowledged_at: string;
-          /** @constant */
-          confirm_carrier_commit: "I understand this submits to the carrier";
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              carrier_enterprise_id: string | null;
-              legal_name: string;
-              dba: string;
-              status: string;
-              rejection_reasons: string[];
-              synced_at: string | null;
-              loa_document_id: string | null;
-              reputation: {
-                status: string;
-                check_frequency: string;
-                rejection_reasons: string[];
-                last_synced_at: string | null;
-              } | null;
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_enterprise_id_generate_loa_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          signer_full_name: string;
-          /** Format: email */
-          signer_email: string;
-          signer_title: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              pdf_base64: string;
-              filename: string;
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_documents_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          file_base64: string;
-          filename: string;
-          customer_reference?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              document_id: string;
-              filename: string;
-              content_type: string | null;
-              status: string | null;
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
-  v1_caller_trust_documents_id_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              document_id: string;
-              filename: string | null;
-              content_type: string | null;
-              status: string | null;
-              av_scan_status: string | null;
-              sha256: string | null;
+    v1_caller_ids_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
             };
-          };
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              enterprise_id: string;
-              status: string;
-              check_frequency: string;
-              rejection_reasons: string[];
-              last_synced_at: string | null;
-            } | null;
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          /** @enum {string} */
-          check_frequency?: "business_daily" | "daily" | "weekly" | "biweekly" | "monthly" | "never";
-          loa_document_id?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              enterprise_id: string;
-              status: string;
-              check_frequency: string;
-              rejection_reasons: string[];
-              last_synced_at: string | null;
+        requestBody: {
+            content: {
+                "application/json": {
+                    phone_number: string;
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_delete: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              enterprise_id: string;
-              /** @constant */
-              disabled: true;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            caller_id_id: string;
+                            message: string;
+                        };
+                    };
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          /** @enum {string} */
-          check_frequency: "business_daily" | "daily" | "weekly" | "biweekly" | "monthly" | "never";
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              enterprise_id: string;
-              status: string;
-              check_frequency: string;
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_numbers_get: {
-    parameters: {
-      query: {
-        limit: number;
-        cursor?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_number: string;
-              enterprise_id: string;
-              spam_risk: string | null;
-              spam_category: string | null;
-              maturity_score: number | null;
-              connection_score: number | null;
-              engagement_score: number | null;
-              sentiment_score: number | null;
-              last_refreshed_at: string | null;
-            }[];
-            meta: {
-              cursor?: string;
-              page_size: number;
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_numbers_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          phone_numbers: string[];
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              enrolled: number;
-              phone_numbers: string[];
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_numbers_phone_get: {
-    parameters: {
-      query: {
-        fresh: unknown;
-      };
-      header?: never;
-      path: {
-        phone: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_number: string;
-              enterprise_id: string | null;
-              spam_risk: string | null;
-              spam_category: string | null;
-              maturity_score: number | null;
-              connection_score: number | null;
-              engagement_score: number | null;
-              sentiment_score: number | null;
-              last_refreshed_at: string | null;
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_reputation_numbers_phone_delete: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        phone: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_number: string;
-              /** @constant */
-              disenrolled: true;
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_brand_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              display_name: string;
-              call_reason: string;
-              logo_url: string | null;
-              status: string;
-              rejection_reasons: string[];
-              submitted_at: string | null;
-              approved_at: string | null;
-            } | null;
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_trust_brand_put: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          display_name: string;
-          call_reason: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              display_name: string;
-              call_reason: string;
-              status: string;
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
-  v1_caller_trust_brand_submit_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    v1_caller_trust_brand_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          "application/json": {
-            data: {
-              id: string;
-              status: string;
-              submitted_at: string | null;
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            display_name: string;
+                            call_reasons: string[];
+                            authorizer_name: string | null;
+                            authorizer_email: string | null;
+                            authorizer_email_verified: boolean;
+                            logo_url: string | null;
+                            status: string;
+                            telnyx_status: string | null;
+                            rejection_reasons: string[];
+                            submitted_at: string | null;
+                            approved_at: string | null;
+                        } | null;
+                    };
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_ids_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              caller_id_id: string;
-              phone_number: string;
-              status: string;
-              verified_at: string | null;
-              certification_method: string | null;
-              cnam_display_name: string | null;
-              cnam_status: string | null;
-              rcd_display_name: string | null;
-              rcd_status: string | null;
-              active: boolean;
-              created_at: string;
-              updated_at: string;
-            }[];
-            meta: {
-              cursor?: string;
-              total_results?: number;
-              page_size?: number;
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_ids_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          phone_number: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              caller_id_id: string;
-              validation_code: string;
-              message: string;
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_ids_id_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          cnam_display_name: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              caller_id_id: string;
-              phone_number: string;
-              status: string;
-              verified_at: string | null;
-              certification_method: string | null;
-              cnam_display_name: string | null;
-              cnam_status: string | null;
-              rcd_display_name: string | null;
-              rcd_status: string | null;
-              active: boolean;
-              created_at: string;
-              updated_at: string;
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_caller_ids_id_verify_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          verification_code: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              verified: boolean;
-              message: string;
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_usage_phoneId_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        phoneId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_id: number;
-              phone_number: string;
-              period_start: string;
-              period_end: string;
-              calls_placed: number;
-              minutes_used: number;
-              duration_seconds: number;
-              calls_by_status: {
-                [key: string]: number;
-              };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_webrtc_token_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          from_number: string;
-          to_number: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              token: string;
-              expires_in: number;
-              call_id: string;
-              from_number: string;
-              to_number: string;
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
-  v1_room_token_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          from_number: string;
-          to_number: string;
-          ttl_seconds?: number;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              token: string;
-              room_url: string;
-              room_name: string;
-              call_id: string;
-              expires_in: number;
-              from_number: string;
-              to_number: string;
+    v1_caller_trust_brand_put: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
             };
-          };
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_client_tokens_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          from_numbers: string[];
-          to_numbers?: string[];
-          scopes?: (
-            | "account:read"
-            | "voice:read"
-            | "voice:write"
-            | "voice:webrtc"
-            | "calls:read"
-            | "calls:write"
-            | "agents:read"
-            | "agents:write"
-            | "phone_numbers:read"
-            | "phone_numbers:write"
-            | "sms:read"
-            | "sms:write"
-            | "webhooks:read"
-            | "webhooks:write"
-            | "caller_trust:read"
-            | "caller_trust:write"
-            | "brand:read"
-            | "brand:write"
-            | "sub_entities:read"
-            | "sub_entities:write"
-            | "usage:read"
-            | "tokens:mint"
-          )[];
-          ttl_seconds?: number;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              token: string;
-              expires_in: number;
-              from_numbers: string[];
-              to_numbers: string[];
-              scopes: string[];
+        requestBody: {
+            content: {
+                "application/json": {
+                    display_name: string;
+                    call_reasons: string[];
+                    authorizer_name: string;
+                    /** Format: email */
+                    authorizer_email: string;
+                };
             };
-          };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_id_cnam_status_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              id: number;
-              phone_number: string;
-              cnam_display_name: string | null;
-              cnam_status: string;
-              /** @enum {string} */
-              live_status: "active" | "inactive" | "provisioning";
-              live_enabled: boolean;
-              live_display_name: string | null;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            display_name: string;
+                            call_reasons: string[];
+                            status: string;
+                        };
+                    };
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_sms_send_post: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          to: string;
-          from: string;
-          message: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              message_id: string;
-              to: string;
-              from: string;
-              status: string;
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_sms_config_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              auto_reply_enabled: boolean;
-              reply_delay_seconds: number;
-              default_prompt: string | null;
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_sms_config_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          auto_reply_enabled?: boolean;
-          reply_delay_seconds?: number;
-          default_prompt?: string | null;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              auto_reply_enabled: boolean;
-              reply_delay_seconds: number;
-              default_prompt: string | null;
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_id_sms_config_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_number_id: number;
-              has_override: boolean;
-              auto_reply_enabled: boolean | null;
-              reply_delay_seconds: number | null;
-              default_prompt: string | null;
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
-        };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-    };
-  };
-  v1_phone_numbers_id_sms_config_patch: {
-    parameters: {
-      query?: never;
-      header?: {
-        /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-        "Idempotency-Key"?: string;
-      };
-      path: {
-        id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          auto_reply_enabled?: boolean;
-          reply_delay_seconds?: number;
-          default_prompt?: string | null;
-        };
-      };
-    };
-    responses: {
-      /** @description Success */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            data: {
-              phone_number_id: number;
-              has_override: boolean;
-              auto_reply_enabled: boolean | null;
-              reply_delay_seconds: number | null;
-              default_prompt: string | null;
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
             };
-          };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
         };
-      };
-      /** @description Validation error */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Conflict (incl. idempotency conflicts) */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorEnvelope"];
-        };
-      };
     };
-  };
+    v1_caller_trust_brand_submit_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            status: string;
+                            telnyx_status: string | null;
+                            submitted_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_documents_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            document_id: string;
+                            filename: string | null;
+                            content_type: string | null;
+                            status: string | null;
+                            av_scan_status: string | null;
+                            sha256: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_documents_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    file_base64: string;
+                    filename: string;
+                    customer_reference?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            document_id: string;
+                            filename: string;
+                            content_type: string | null;
+                            status: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_id_generate_loa_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    signer_full_name: string;
+                    /** Format: email */
+                    signer_email: string;
+                    signer_title: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            pdf_base64: string;
+                            filename: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_id_resign_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    signer_full_name: string;
+                    /** Format: email */
+                    signer_email: string;
+                    signer_title: string;
+                    /** Format: date-time */
+                    consent_acknowledged_at: string;
+                    /** @constant */
+                    confirm_carrier_commit: "I understand this submits to the carrier";
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                            rejection_reasons: string[];
+                            synced_at: string | null;
+                            loa_document_id: string | null;
+                            reputation: {
+                                status: string;
+                                check_frequency: string;
+                                rejection_reasons: string[];
+                                last_synced_at: string | null;
+                            } | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            role_type: string;
+                            status: string;
+                            rejection_reasons: string[];
+                            synced_at: string | null;
+                            loa_document_id: string | null;
+                            created_at: string;
+                            read_only: boolean;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_id_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            /** @constant */
+                            deleted: true;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_id_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    legal_name?: string;
+                    dba?: string;
+                    /** @enum {string} */
+                    organization_type?: "COMMERCIAL" | "GOVERNMENT" | "NON_PROFIT";
+                    country_code?: string;
+                    website?: string;
+                    fein?: string;
+                    /** @enum {string} */
+                    industry?: "accounting" | "finance" | "billing" | "collections" | "business" | "charity" | "nonprofit" | "communications" | "telecom" | "customer service" | "support" | "delivery" | "shipping" | "logistics" | "education" | "financial" | "banking" | "government" | "public" | "healthcare" | "health" | "pharmacy" | "medical" | "insurance" | "legal" | "law" | "notifications" | "scheduling" | "real estate" | "property" | "retail" | "ecommerce" | "sales" | "marketing" | "software" | "technology" | "tech" | "media" | "surveys" | "market research" | "travel" | "hospitality" | "hotel";
+                    /** @enum {string} */
+                    jurisdiction_of_incorporation?: "AL" | "AK" | "AZ" | "AR" | "CA" | "CO" | "CT" | "DE" | "DC" | "FL" | "GA" | "HI" | "ID" | "IL" | "IN" | "IA" | "KS" | "KY" | "LA" | "ME" | "MD" | "MA" | "MI" | "MN" | "MS" | "MO" | "MT" | "NE" | "NV" | "NH" | "NJ" | "NM" | "NY" | "NC" | "ND" | "OH" | "OK" | "OR" | "PA" | "RI" | "SC" | "SD" | "TN" | "TX" | "UT" | "VT" | "VA" | "WA" | "WV" | "WI" | "WY" | "AS" | "GU" | "MP" | "PR" | "VI";
+                    /** @enum {string} */
+                    number_of_employees?: "SIZE_1_10" | "SIZE_11_50" | "SIZE_51_200" | "SIZE_201_500" | "SIZE_501_2000" | "SIZE_2001_10000" | "SIZE_10001_PLUS";
+                    /** @enum {string} */
+                    organization_legal_type?: "CORPORATION" | "LLC" | "PARTNERSHIP" | "NONPROFIT" | "OTHER";
+                    organization_contact?: {
+                        first_name: string;
+                        last_name: string;
+                        /** Format: email */
+                        email: string;
+                        job_title: string;
+                        phone: string;
+                    };
+                    billing_contact?: {
+                        first_name: string;
+                        last_name: string;
+                        /** Format: email */
+                        email: string;
+                        phone_number: string;
+                    };
+                    organization_address?: {
+                        country: string;
+                        administrative_area: string;
+                        city: string;
+                        postal_code: string;
+                        street_address: string;
+                        extended_address?: string | null;
+                    };
+                    billing_address?: {
+                        country: string;
+                        administrative_area: string;
+                        city: string;
+                        postal_code: string;
+                        street_address: string;
+                        extended_address?: string | null;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                            role_type: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_id_sign_and_submit_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    signer_full_name: string;
+                    /** Format: email */
+                    signer_email: string;
+                    signer_title: string;
+                    /** Format: date-time */
+                    consent_acknowledged_at: string;
+                    /** @constant */
+                    confirm_carrier_commit: "I understand this submits to the carrier";
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                            rejection_reasons: string[];
+                            synced_at: string | null;
+                            loa_document_id: string | null;
+                            reputation: {
+                                status: string;
+                                check_frequency: string;
+                                rejection_reasons: string[];
+                                last_synced_at: string | null;
+                            } | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_id_submit_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_generate_loa_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    signer_full_name: string;
+                    /** Format: email */
+                    signer_email: string;
+                    signer_title: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            pdf_base64: string;
+                            filename: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_resign_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    signer_full_name: string;
+                    /** Format: email */
+                    signer_email: string;
+                    signer_title: string;
+                    /** Format: date-time */
+                    consent_acknowledged_at: string;
+                    /** @constant */
+                    confirm_carrier_commit: "I understand this submits to the carrier";
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                            rejection_reasons: string[];
+                            synced_at: string | null;
+                            loa_document_id: string | null;
+                            reputation: {
+                                status: string;
+                                check_frequency: string;
+                                rejection_reasons: string[];
+                                last_synced_at: string | null;
+                            } | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            role_type: string;
+                            status: string;
+                            rejection_reasons: string[];
+                            synced_at: string | null;
+                            loa_document_id: string | null;
+                            read_only: boolean;
+                        } | null;
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    legal_name: string;
+                    dba: string;
+                    /** @enum {string} */
+                    organization_type: "COMMERCIAL" | "GOVERNMENT" | "NON_PROFIT";
+                    /** @default US */
+                    country_code: string;
+                    website: string;
+                    fein: string;
+                    /** @enum {string} */
+                    industry: "accounting" | "finance" | "billing" | "collections" | "business" | "charity" | "nonprofit" | "communications" | "telecom" | "customer service" | "support" | "delivery" | "shipping" | "logistics" | "education" | "financial" | "banking" | "government" | "public" | "healthcare" | "health" | "pharmacy" | "medical" | "insurance" | "legal" | "law" | "notifications" | "scheduling" | "real estate" | "property" | "retail" | "ecommerce" | "sales" | "marketing" | "software" | "technology" | "tech" | "media" | "surveys" | "market research" | "travel" | "hospitality" | "hotel";
+                    /** @enum {string} */
+                    jurisdiction_of_incorporation: "AL" | "AK" | "AZ" | "AR" | "CA" | "CO" | "CT" | "DE" | "DC" | "FL" | "GA" | "HI" | "ID" | "IL" | "IN" | "IA" | "KS" | "KY" | "LA" | "ME" | "MD" | "MA" | "MI" | "MN" | "MS" | "MO" | "MT" | "NE" | "NV" | "NH" | "NJ" | "NM" | "NY" | "NC" | "ND" | "OH" | "OK" | "OR" | "PA" | "RI" | "SC" | "SD" | "TN" | "TX" | "UT" | "VT" | "VA" | "WA" | "WV" | "WI" | "WY" | "AS" | "GU" | "MP" | "PR" | "VI";
+                    /** @enum {string} */
+                    number_of_employees: "SIZE_1_10" | "SIZE_11_50" | "SIZE_51_200" | "SIZE_201_500" | "SIZE_501_2000" | "SIZE_2001_10000" | "SIZE_10001_PLUS";
+                    /** @enum {string} */
+                    organization_legal_type: "CORPORATION" | "LLC" | "PARTNERSHIP" | "NONPROFIT" | "OTHER";
+                    organization_contact: {
+                        first_name: string;
+                        last_name: string;
+                        /** Format: email */
+                        email: string;
+                        job_title: string;
+                        phone: string;
+                    };
+                    billing_contact: {
+                        first_name: string;
+                        last_name: string;
+                        /** Format: email */
+                        email: string;
+                        phone_number: string;
+                    };
+                    organization_address: {
+                        country: string;
+                        administrative_area: string;
+                        city: string;
+                        postal_code: string;
+                        street_address: string;
+                        extended_address?: string | null;
+                    };
+                    billing_address: {
+                        country: string;
+                        administrative_area: string;
+                        city: string;
+                        postal_code: string;
+                        street_address: string;
+                        extended_address?: string | null;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                            role_type: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            /** @constant */
+                            deleted: true;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_sign_and_submit_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    signer_full_name: string;
+                    /** Format: email */
+                    signer_email: string;
+                    signer_title: string;
+                    /** Format: date-time */
+                    consent_acknowledged_at: string;
+                    /** @constant */
+                    confirm_carrier_commit: "I understand this submits to the carrier";
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                            rejection_reasons: string[];
+                            synced_at: string | null;
+                            loa_document_id: string | null;
+                            reputation: {
+                                status: string;
+                                check_frequency: string;
+                                rejection_reasons: string[];
+                                last_synced_at: string | null;
+                            } | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_enterprise_submit_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            carrier_enterprise_id: string | null;
+                            legal_name: string;
+                            dba: string;
+                            status: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_registration_profile_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_purpose: ("attorney_legal" | "financial_service" | "first_responder" | "government" | "health" | "informational" | "pharmacy" | "political" | "real_estate" | "school_college" | "survey" | "telemarketing") | null;
+                            monthly_call_volume: ("1" | "101" | "501" | "1001" | "5001" | "10001" | "50001" | "dontknow") | null;
+                            /** @enum {string} */
+                            effective_call_purpose: "attorney_legal" | "financial_service" | "first_responder" | "government" | "health" | "informational" | "pharmacy" | "political" | "real_estate" | "school_college" | "survey" | "telemarketing";
+                            /** @enum {string} */
+                            effective_monthly_call_volume: "1" | "101" | "501" | "1001" | "5001" | "10001" | "50001" | "dontknow";
+                            call_purpose_options: {
+                                value: string;
+                                label: string;
+                            }[];
+                            monthly_call_volume_options: {
+                                value: string;
+                                label: string;
+                            }[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_registration_profile_put: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    call_purpose: "attorney_legal" | "financial_service" | "first_responder" | "government" | "health" | "informational" | "pharmacy" | "political" | "real_estate" | "school_college" | "survey" | "telemarketing";
+                    /** @enum {string} */
+                    monthly_call_volume: "1" | "101" | "501" | "1001" | "5001" | "10001" | "50001" | "dontknow";
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_purpose: ("attorney_legal" | "financial_service" | "first_responder" | "government" | "health" | "informational" | "pharmacy" | "political" | "real_estate" | "school_college" | "survey" | "telemarketing") | null;
+                            monthly_call_volume: ("1" | "101" | "501" | "1001" | "5001" | "10001" | "50001" | "dontknow") | null;
+                            /** @enum {string} */
+                            effective_call_purpose: "attorney_legal" | "financial_service" | "first_responder" | "government" | "health" | "informational" | "pharmacy" | "political" | "real_estate" | "school_college" | "survey" | "telemarketing";
+                            /** @enum {string} */
+                            effective_monthly_call_volume: "1" | "101" | "501" | "1001" | "5001" | "10001" | "50001" | "dontknow";
+                            call_purpose_options: {
+                                value: string;
+                                label: string;
+                            }[];
+                            monthly_call_volume_options: {
+                                value: string;
+                                label: string;
+                            }[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_numbers_phone_get: {
+        parameters: {
+            query: {
+                fresh: unknown;
+            };
+            header?: never;
+            path: {
+                phone: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_number: string;
+                            enterprise_id: string | null;
+                            spam_risk: string | null;
+                            spam_category: string | null;
+                            maturity_score: number | null;
+                            connection_score: number | null;
+                            engagement_score: number | null;
+                            sentiment_score: number | null;
+                            last_refreshed_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_numbers_phone_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                phone: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_number: string;
+                            /** @constant */
+                            disenrolled: true;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_numbers_get: {
+        parameters: {
+            query: {
+                limit: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_number: string;
+                            enterprise_id: string;
+                            spam_risk: string | null;
+                            spam_category: string | null;
+                            maturity_score: number | null;
+                            connection_score: number | null;
+                            engagement_score: number | null;
+                            sentiment_score: number | null;
+                            last_refreshed_at: string | null;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            page_size: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_numbers_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    phone_numbers: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            enrolled: number;
+                            phone_numbers: string[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_remediations_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            request_id: string;
+                            status: string;
+                            source: string;
+                            submitted_at: string | null;
+                            completed_at: string | null;
+                            numbers: {
+                                phone_number: string;
+                                outcome: string | null;
+                                billed_amount_dc: number;
+                            }[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_remediations_get: {
+        parameters: {
+            query: {
+                limit: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            request_id: string;
+                            status: string;
+                            source: string;
+                            submitted_at: string | null;
+                            completed_at: string | null;
+                            numbers_count: number;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            page_size: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_remediations_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    phone_numbers: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            request_id: string;
+                            status: string;
+                            source: string;
+                            submitted_at: string | null;
+                            completed_at: string | null;
+                            numbers: {
+                                phone_number: string;
+                                outcome: string | null;
+                                billed_amount_dc: number;
+                            }[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            enterprise_id: string;
+                            status: string;
+                            check_frequency: string;
+                            rejection_reasons: string[];
+                            last_synced_at: string | null;
+                        } | null;
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    check_frequency?: "weekly" | "biweekly" | "monthly" | "never";
+                    loa_document_id?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            enterprise_id: string;
+                            status: string;
+                            check_frequency: string;
+                            rejection_reasons: string[];
+                            last_synced_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            enterprise_id: string;
+                            /** @constant */
+                            disabled: true;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_caller_trust_reputation_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    check_frequency: "weekly" | "biweekly" | "monthly" | "never";
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            enterprise_id: string;
+                            status: string;
+                            check_frequency: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_calls_id_hangup_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_id: string;
+                            status: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_calls_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            status: string | null;
+                            direction: string | null;
+                            from_number: string | null;
+                            to_number: string | null;
+                            started_at: string | null;
+                            ended_at: string | null;
+                            duration_seconds: number | null;
+                            phone_number_id: number | null;
+                            organization_id: string | null;
+                            user_id: string | null;
+                            has_recording: boolean;
+                            recording_url: string | null;
+                            has_transcript: boolean;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_calls_id_transcript_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_id: string;
+                            transcript: string | null;
+                            structured_transcript: ({
+                                role: string;
+                                text: string;
+                                timestamp?: string | null;
+                                interrupted?: boolean;
+                                language?: string;
+                            } & {
+                                [key: string]: unknown;
+                            })[] | null;
+                            transcript_provider: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_calls_dial_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    from_number: string;
+                    to_number: string;
+                    connect_number?: string;
+                    /** @default true */
+                    record: boolean;
+                    /** @default false */
+                    amd: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_id: string;
+                            provider_call_sid: string;
+                            from_number: string;
+                            to_number: string;
+                            status: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_calls_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                status?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            status: string;
+                            direction: string;
+                            from_number: string;
+                            to_number: string;
+                            started_at: string | null;
+                            ended_at: string | null;
+                            duration_seconds: number | null;
+                            phone_number_id: string | null;
+                            has_recording: boolean;
+                            recording_url: string | null;
+                            has_transcript: boolean;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            total_results?: number;
+                            page_size?: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_calls_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    phoneNumber: string;
+                    assistantId?: string;
+                    script?: string;
+                    name?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_id: string;
+                            contact_id: string;
+                            status: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_client_tokens_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    from_numbers: string[];
+                    to_numbers: string[];
+                    scopes?: "voice:webrtc"[];
+                    ttl_seconds?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            token: string;
+                            expires_in: number;
+                            from_numbers: string[];
+                            to_numbers: string[];
+                            scopes: string[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_contacts_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            name: string;
+                            phone_number: string | null;
+                            email: string | null;
+                            status: string;
+                            source: string;
+                            metadata: unknown | null;
+                            created_at: string;
+                            updated_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_contacts_id_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            deleted: boolean;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_contacts_id_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    email?: string | null;
+                    company?: string | null;
+                    metadata?: {
+                        [key: string]: unknown;
+                    } | null;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            name: string;
+                            phone_number: string | null;
+                            email: string | null;
+                            status: string;
+                            source: string;
+                            metadata: unknown | null;
+                            created_at: string;
+                            updated_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_contacts_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            name: string;
+                            phone_number: string | null;
+                            email: string | null;
+                            status: string;
+                            source: string;
+                            metadata: unknown | null;
+                            created_at: string;
+                            updated_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            total_results?: number;
+                            page_size?: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_contacts_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    phone_number: string;
+                    name?: string;
+                    email?: string;
+                    metadata?: {
+                        [key: string]: unknown;
+                    };
+                    sms_consent?: boolean;
+                    sms_consent_source?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            name: string;
+                            phone_number: string | null;
+                            email: string | null;
+                            status: string;
+                            source: string;
+                            metadata: unknown | null;
+                            created_at: string;
+                            updated_at: string;
+                            created: boolean;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_jobs_jobId_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jobId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            type: string;
+                            status: string;
+                            objective: string;
+                            contact_id: string | null;
+                            deadline: string | null;
+                            created_at: string;
+                            closed_at: string | null;
+                            events: {
+                                seq: number;
+                                occurred_at: string;
+                                row_type: string;
+                                actor: string | null;
+                                channel: string | null;
+                                system: string | null;
+                                body: string;
+                            }[];
+                            outcomes: {
+                                id: string;
+                                kind: string;
+                                occurred_at: string;
+                                value: number | null;
+                                billable: boolean;
+                                billed_at: string | null;
+                                billed_amount: number | null;
+                                attribution_mode: string;
+                                disputed_at: string | null;
+                                evidence: {
+                                    interaction_type: string;
+                                    interaction_id: string;
+                                    note: string | null;
+                                }[];
+                            }[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_jobs_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            type: string;
+                            status: string;
+                            objective: string;
+                            contact_id: string | null;
+                            opportunity_id: string | null;
+                            deadline: string | null;
+                            created_at: string;
+                            closed_at: string | null;
+                        }[];
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_jobs_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    type: string;
+                    objective: string;
+                    contact_id?: string;
+                    opportunity_id?: string;
+                    deadline?: unknown;
+                    success_criteria?: {
+                        outcome_kinds?: string[];
+                    };
+                    guardrails?: {
+                        channels?: string[];
+                        quiet_hours?: {
+                            from: number;
+                            to: number;
+                            time_zone?: string;
+                        };
+                        max_touches?: number;
+                        max_touches_since_reply?: number;
+                        min_hours_between_touches?: number;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            type: string;
+                            status: string;
+                            objective: string;
+                            contact_id: string | null;
+                            opportunity_id: string | null;
+                            deadline: string | null;
+                            created_at: string;
+                            closed_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_me_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            api_key_id: string;
+                            user: {
+                                /** Format: uuid */
+                                id: string;
+                                email: string;
+                                name: string | null;
+                            } | null;
+                            organization: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                slug: string;
+                            } | null;
+                            scopes: string[];
+                            is_demo: boolean;
+                            demo_expires_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_messages_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            phone_number: string | null;
+                            /** @enum {string} */
+                            direction: "inbound" | "outbound";
+                            content: string;
+                            status: string;
+                            contact_name: string | null;
+                            contact_email: string | null;
+                            contact_token: string | null;
+                            created_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_messages_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                direction?: "inbound" | "outbound";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            phone_number: string | null;
+                            /** @enum {string} */
+                            direction: "inbound" | "outbound";
+                            content: string;
+                            status: string;
+                            contact_name: string | null;
+                            contact_email: string | null;
+                            contact_token: string | null;
+                            created_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            total_results?: number;
+                            page_size?: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_number_registrations_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            registration_id: string;
+                            phone_number: string;
+                            status: string;
+                            source: string;
+                            hosted: boolean;
+                            monthly_rate_dc: number;
+                            registered_at: string | null;
+                            cancelled_at: string | null;
+                            created_at: string;
+                            submission: {
+                                submission_id: string;
+                                status: string;
+                                submitted_at: string | null;
+                                vendor_acks: {
+                                    hiya: string | null;
+                                    tns: string | null;
+                                    first_orion: string | null;
+                                };
+                                last_error: string | null;
+                            } | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_number_registrations_id_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            registration_id: string;
+                            status: string;
+                            cancelled_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_number_registrations_get: {
+        parameters: {
+            query: {
+                limit: number;
+                cursor?: string;
+                status?: "pending" | "submitted" | "active" | "failed" | "cancelled";
+                phone_number?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            registration_id: string;
+                            phone_number: string;
+                            status: string;
+                            source: string;
+                            hosted: boolean;
+                            monthly_rate_dc: number;
+                            registered_at: string | null;
+                            cancelled_at: string | null;
+                            created_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            page_size: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_number_registrations_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    phone_numbers: string[];
+                    attestation: {
+                        /** @constant */
+                        authorized_to_register: true;
+                    };
+                    business_identity?: {
+                        business_name?: string;
+                        street_address?: string;
+                        city?: string;
+                        state?: string;
+                        zip?: string;
+                        /** Format: uri */
+                        website?: string;
+                        contact_name?: string;
+                        contact_phone?: string;
+                        /** @enum {string} */
+                        call_purpose?: "attorney_legal" | "financial_service" | "first_responder" | "government" | "health" | "informational" | "pharmacy" | "political" | "real_estate" | "school_college" | "survey" | "telemarketing";
+                    };
+                    /** @enum {string} */
+                    monthly_call_volume?: "1" | "101" | "501" | "1001" | "5001" | "10001" | "50001" | "dontknow";
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            submission_ids: string[];
+                            registrations: {
+                                registration_id: string;
+                                phone_number: string;
+                                status: string;
+                                source: string;
+                                hosted: boolean;
+                                monthly_rate_dc: number;
+                                registered_at: string | null;
+                                cancelled_at: string | null;
+                                created_at: string;
+                            }[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_id_cnam_status_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: number;
+                            phone_number: string;
+                            cnam_display_name: string | null;
+                            cnam_status: string;
+                            /** @enum {string} */
+                            live_status: "active" | "inactive" | "provisioning";
+                            live_enabled: boolean;
+                            live_display_name: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: number;
+                            phone_number: string;
+                            name: string | null;
+                            organization_id: string | null;
+                            user_id: string | null;
+                            provider: string;
+                            is_active: boolean;
+                            subscription_status: string | null;
+                            iso_country: string;
+                            reputation_enrolled_at: string | null;
+                            created_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_id_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: number;
+                            deleted: boolean;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_id_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    cnam_display_name?: string;
+                    cnam_enabled?: boolean;
+                    recording_enabled?: boolean;
+                    transcription_enabled?: boolean;
+                    /** Format: uuid */
+                    agent_id?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: number;
+                            cnam_display_name: string | null;
+                            cnam_status: string;
+                            name: string | null;
+                            recording_enabled: boolean;
+                            transcription_enabled: boolean;
+                            agent_id: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_id_sms_config_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_number_id: number;
+                            has_override: boolean;
+                            auto_reply_enabled: boolean | null;
+                            reply_delay_seconds: number | null;
+                            default_prompt: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_id_sms_config_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    auto_reply_enabled?: boolean;
+                    reply_delay_seconds?: number;
+                    default_prompt?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_number_id: number;
+                            has_override: boolean;
+                            auto_reply_enabled: boolean | null;
+                            reply_delay_seconds: number | null;
+                            default_prompt: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_get: {
+        parameters: {
+            query: {
+                limit: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: number;
+                            phone_number: string;
+                            name: string | null;
+                            organization_id: string | null;
+                            user_id: string | null;
+                            provider: string;
+                            is_active: boolean;
+                            iso_country: string;
+                            reputation_enrolled_at: string | null;
+                            cnam_display_name: string | null;
+                            cnam_status: string;
+                            texting_enabled: boolean;
+                            /** @enum {string} */
+                            texting_status: "approved" | "pending" | "rejected" | "not_registered";
+                            created_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            page_size: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    phone_number?: string;
+                    area_code?: string;
+                    name?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_record_id: number;
+                            workflow_run_id: string;
+                            status_url: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_search_get: {
+        parameters: {
+            query: {
+                country: string;
+                area_code?: string;
+                contains?: string;
+                in_region?: string;
+                limit: number;
+                number_type: "local" | "tollFree" | "mobile" | "national";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_number: string;
+                            locality: string;
+                            region: string;
+                            features: string[];
+                        }[];
+                        meta: {
+                            page_size: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_room_token_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    from_number: string;
+                    to_number: string;
+                    ttl_seconds?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            token: string;
+                            room_url: string;
+                            room_name: string;
+                            call_id: string;
+                            expires_in: number;
+                            from_number: string;
+                            to_number: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sms_config_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            auto_reply_enabled: boolean;
+                            reply_delay_seconds: number;
+                            default_prompt: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sms_config_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    auto_reply_enabled?: boolean;
+                    reply_delay_seconds?: number;
+                    default_prompt?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            auto_reply_enabled: boolean;
+                            reply_delay_seconds: number;
+                            default_prompt: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sms_send_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    to: string;
+                    from: string;
+                    message: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            message_id: string;
+                            to: string;
+                            from: string;
+                            status: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sub_entities_id_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            slug: string | null;
+                            /** Format: uuid */
+                            parent_organization_id: string;
+                            hipaa_enabled: boolean;
+                            member_count: number;
+                            phone_number_count: number;
+                            created_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sub_entities_id_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    hipaa_enabled?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            slug: string | null;
+                            /** Format: uuid */
+                            parent_organization_id: string;
+                            hipaa_enabled: boolean;
+                            member_count: number;
+                            phone_number_count: number;
+                            created_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sub_entities_get: {
+        parameters: {
+            query: {
+                limit: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            slug: string | null;
+                            /** Format: uuid */
+                            parent_organization_id: string;
+                            hipaa_enabled: boolean;
+                            member_count: number;
+                            phone_number_count: number;
+                            created_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            page_size: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sub_entities_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    slug?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            slug: string | null;
+                            /** Format: uuid */
+                            parent_organization_id: string;
+                            hipaa_enabled: boolean;
+                            member_count: number;
+                            phone_number_count: number;
+                            created_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_usage_phoneId_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                phoneId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            phone_id: number;
+                            phone_number: string;
+                            period_start: string;
+                            period_end: string;
+                            calls_placed: number;
+                            minutes_used: number;
+                            duration_seconds: number;
+                            calls_by_status: {
+                                [key: string]: number;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_usage_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            period_start: string;
+                            period_end: string;
+                            calls_placed: number;
+                            minutes_used: number;
+                            phone_numbers_active: number;
+                            spam_risk_distribution: {
+                                low: number;
+                                medium: number;
+                                high: number;
+                                unknown: number;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_webhook_subscriptions_id_delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            deleted: boolean;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_webhook_subscriptions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            webhook_url: string;
+                            event_type: string | null;
+                            active: boolean;
+                            created_at: string;
+                        }[];
+                        meta: {
+                            cursor?: string;
+                            total_results?: number;
+                            page_size?: number;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_webhook_subscriptions_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    webhook_url: string;
+                    event_type: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            secret: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_webrtc_token_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    from_number: string;
+                    to_number: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            token: string;
+                            expires_in: number;
+                            call_id: string;
+                            from_number: string;
+                            to_number: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
 }

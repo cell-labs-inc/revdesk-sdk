@@ -1,9 +1,9 @@
 {
   "name": "@revdesk/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Official typed TypeScript client for the RevDesk v1 API.",
   "license": "MIT",
-  "homepage": "https://docs.revdesk.com/api-reference",
+  "homepage": "https://docs.revdesk.com/api-reference/sdks",
   "repository": {
     "type": "git",
     "url": "https://github.com/cell-labs-inc/revdesk-sdk",
@@ -41,11 +41,10 @@
   "scripts": {
     "build": "tsdown",
     "clean": "rm -rf dist .turbo",
-    "gen:types": "openapi-typescript ../../apps/docs/openapi.json -o src/generated/openapi.ts",
+    "gen:types": "bash ./scripts/gen-openapi-types.sh",
     "type-check": "bash ../../scripts/dev/type-check.sh tsc --noEmit"
   },
   "devDependencies": {
-    "openapi-typescript": "^7.4.4",
     "tsdown": "0.22.14",
     "typescript": "7.0.2"
   },

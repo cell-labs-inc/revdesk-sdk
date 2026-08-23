@@ -5,6 +5,10 @@ texts, manage phone numbers and caller trust, read usage, and manage sub-entitie
 
 [![npm](https://img.shields.io/npm/v/@revdesk/sdk)](https://www.npmjs.com/package/@revdesk/sdk)
 
+[Documentation](https://docs.revdesk.com/api-reference/sdks) ·
+[npm package](https://www.npmjs.com/package/@revdesk/sdk) ·
+[OpenAPI schema](https://www.revdesk.com/openapi.json)
+
 ## Install
 
 ```bash
@@ -34,7 +38,7 @@ This repo is a Bun workspace mirrored from RevDesk's monorepo.
 
 ```bash
 bun install
-bun run build       # ESM + CJS + .d.ts (via tsup)
+bun run build       # ESM + CJS + .d.ts (via tsdown)
 bun run type-check
 ```
 

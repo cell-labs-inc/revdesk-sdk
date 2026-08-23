@@ -4,6 +4,12 @@ Official typed TypeScript client for the [RevDesk](https://revdesk.com) v1 API â
 calls, SMS, caller IDs, caller trust, usage, and sub-entities. Types are generated directly from the
 RevDesk OpenAPI spec, so request and response shapes always match the live API.
 
+[![npm](https://img.shields.io/npm/v/@revdesk/sdk)](https://www.npmjs.com/package/@revdesk/sdk)
+
+- [SDK documentation](https://docs.revdesk.com/api-reference/sdks)
+- [Source on GitHub](https://github.com/cell-labs-inc/revdesk-sdk)
+- [OpenAPI 3.1 schema](https://www.revdesk.com/openapi.json)
+
 ## Install
 
 ```bash

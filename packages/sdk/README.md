@@ -37,6 +37,21 @@ await revdesk.calls.dial({ from_number: "+15551230000", to_number: "+15554560000
 await revdesk.sms.send({ from: "+15551230000", to: "+15554560000", message: "Hi!" });
 ```
 
+## CLI
+
+The package also installs the `revdesk` command. Use it for scripts and one-off API calls without
+writing a client:
+
+```bash
+export REVDESK_API_KEY="rv_…"
+npx @revdesk/sdk request GET /v1/me
+npx @revdesk/sdk request GET '/v1/calls?limit=10'
+npx @revdesk/sdk request POST /v1/sms/send --data '{"from":"+14155550100","to":"+14155550101","message":"Hello"}'
+```
+
+Run `npx @revdesk/sdk --help` for the complete command reference. The CLI reads credentials only
+from `REVDESK_API_KEY` and sends them in the `Authorization` header.
+
 ## AI agents
 
 Every number you buy gets a RevDesk AI agent wired up to answer it automatically. List your agents,

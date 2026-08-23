@@ -1,7 +1,7 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/cli.ts"],
   format: ["esm", "cjs"],
   // dts is emitted via oxc-transform (isolatedDeclarations is on in
   // tsconfig.json) — no TypeScript compiler API involved, which is what lets

@@ -1304,7 +1304,14 @@ export interface components {
     responses: never;
     parameters: never;
     requestBodies: never;
-    headers: never;
+    headers: {
+        /** @description Maximum requests allowed in the current one-minute window. */
+        XRateLimitLimit: number;
+        /** @description Requests remaining in the current window. */
+        XRateLimitRemaining: number;
+        /** @description Unix timestamp when the current window resets. */
+        XRateLimitReset: number;
+    };
     pathItems: never;
 }
 export type $defs = Record<string, never>;
@@ -1321,6 +1328,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1398,6 +1408,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1421,6 +1434,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1501,6 +1517,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1523,6 +1542,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1600,6 +1622,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1636,6 +1661,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1713,6 +1741,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1736,8 +1767,11 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description Success */
-            200: {
+            201: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1802,6 +1836,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1824,6 +1861,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1899,6 +1939,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1924,6 +1967,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1993,6 +2039,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2024,6 +2073,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2093,6 +2145,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2124,6 +2179,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2183,6 +2241,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2203,6 +2264,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2277,6 +2341,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2304,8 +2371,11 @@ export interface operations {
         };
         responses: {
             /** @description Success */
-            200: {
+            201: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2365,6 +2435,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2385,6 +2458,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2454,6 +2530,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2487,6 +2566,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2548,6 +2630,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2571,6 +2656,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2632,6 +2720,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2654,6 +2745,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2717,6 +2811,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2748,6 +2845,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2809,6 +2909,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2843,6 +2946,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2902,6 +3008,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2940,6 +3049,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3011,6 +3123,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3033,6 +3148,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3101,6 +3219,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3126,6 +3247,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3186,6 +3310,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3262,6 +3389,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3324,6 +3454,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3362,6 +3495,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3433,6 +3569,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3458,6 +3597,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3520,6 +3662,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3552,6 +3697,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3611,6 +3759,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3647,6 +3798,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3718,6 +3872,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3738,6 +3895,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3805,6 +3965,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3880,6 +4043,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3942,6 +4108,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3965,6 +4134,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4025,6 +4197,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4061,6 +4236,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4132,6 +4310,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4155,6 +4336,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4217,6 +4401,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4237,6 +4424,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4308,6 +4498,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4340,6 +4533,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4411,6 +4607,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4435,6 +4634,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4501,6 +4703,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4526,6 +4731,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4586,6 +4794,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4609,6 +4820,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4679,6 +4893,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4708,6 +4925,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4767,6 +4987,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4789,6 +5012,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4856,6 +5082,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4879,6 +5108,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4946,6 +5178,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4975,6 +5210,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5042,6 +5280,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5062,6 +5303,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5124,6 +5368,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5155,6 +5402,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5217,6 +5467,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5240,6 +5493,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5300,6 +5556,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5330,6 +5589,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5390,6 +5652,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5415,6 +5680,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5474,6 +5742,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5496,6 +5767,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5567,6 +5841,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5589,6 +5866,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5658,6 +5938,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5690,9 +5973,14 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Success */
-            200: {
+            /** @description Accepted for asynchronous processing */
+            202: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    /** @description Canonical URL to poll for the queued call's current status. */
+                    Location?: string;
                     [name: string]: unknown;
                 };
                 content: {
@@ -5755,6 +6043,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5778,6 +6069,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5852,6 +6146,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5881,9 +6178,14 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Success */
-            200: {
+            /** @description Accepted for asynchronous processing */
+            202: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    /** @description Canonical URL to poll for the queued call's current status. */
+                    Location?: string;
                     [name: string]: unknown;
                 };
                 content: {
@@ -5944,6 +6246,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5976,6 +6281,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6038,6 +6346,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6060,6 +6371,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6126,6 +6440,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6151,6 +6468,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6210,6 +6530,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6246,6 +6569,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6312,6 +6638,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6334,6 +6663,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6405,6 +6737,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6439,8 +6774,11 @@ export interface operations {
         };
         responses: {
             /** @description Success */
-            200: {
+            201: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6508,6 +6846,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6530,6 +6871,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6620,6 +6964,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6640,6 +6987,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6706,6 +7056,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6753,6 +7106,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6819,6 +7175,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6839,6 +7198,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6912,6 +7274,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6934,6 +7299,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7001,6 +7369,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7024,6 +7395,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7096,6 +7470,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7118,6 +7495,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7195,6 +7575,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7220,6 +7603,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7280,6 +7666,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7305,6 +7694,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7375,6 +7767,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7423,6 +7818,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7492,6 +7890,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7514,6 +7915,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7579,6 +7983,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7601,6 +8008,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7669,6 +8079,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7694,6 +8107,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7753,6 +8169,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7790,6 +8209,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7854,6 +8276,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7876,6 +8301,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7938,6 +8366,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7971,6 +8402,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8033,6 +8467,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8056,6 +8493,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8132,6 +8572,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8160,9 +8603,14 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Success */
-            200: {
+            /** @description Accepted for asynchronous processing */
+            202: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    /** @description Canonical URL to poll for provisioning status. */
+                    Location?: string;
                     [name: string]: unknown;
                 };
                 content: {
@@ -8223,6 +8671,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8250,6 +8701,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8314,6 +8768,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8345,6 +8802,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8409,6 +8869,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8429,6 +8892,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8489,6 +8955,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8520,6 +8989,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8580,6 +9052,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8609,8 +9084,11 @@ export interface operations {
         };
         responses: {
             /** @description Success */
-            200: {
+            201: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8672,6 +9150,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8694,6 +9175,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8761,6 +9245,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8793,6 +9280,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8860,6 +9350,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8883,6 +9376,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8954,6 +9450,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8982,8 +9481,11 @@ export interface operations {
         };
         responses: {
             /** @description Success */
-            200: {
+            201: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9051,6 +9553,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9073,6 +9578,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9140,6 +9648,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9160,6 +9671,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9228,6 +9742,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9253,6 +9770,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9312,6 +9832,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9332,6 +9855,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9399,6 +9925,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9427,8 +9956,11 @@ export interface operations {
         };
         responses: {
             /** @description Success */
-            200: {
+            201: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9488,6 +10020,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9518,6 +10053,9 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9580,6 +10118,9 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
                     [name: string]: unknown;
                 };
                 content: {

@@ -6,9 +6,9 @@ describe("RevDesk CLI", () => {
   it("reports the published package version", async () => {
     const stdout = vi.fn();
 
-    expect(
-      await runCli(["--version"], {}, { fetch: vi.fn<typeof fetch>(), stdout, stderr: vi.fn() })
-    ).toBe(0);
+    expect(await runCli(["--version"], {}, { fetch: vi.fn<typeof fetch>(), stdout, stderr: vi.fn() })).toBe(
+      0
+    );
     expect(CLI_VERSION).toBe("0.2.2");
     expect(stdout).toHaveBeenCalledWith("0.2.2");
   });

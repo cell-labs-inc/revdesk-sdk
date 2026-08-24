@@ -11,15 +11,5 @@
   "homepage": "https://www.revdesk.com/developers",
   "repository": "https://github.com/cell-labs-inc/revdesk-sdk",
   "license": "MIT",
-  "keywords": [
-    "revdesk",
-    "voice",
-    "sms",
-    "phone-numbers",
-    "api",
-    "sdk",
-    "cli",
-    "mcp",
-    "agent-skills"
-  ]
+  "keywords": ["revdesk", "voice", "sms", "phone-numbers", "api", "sdk", "cli", "mcp", "agent-skills"]
 }

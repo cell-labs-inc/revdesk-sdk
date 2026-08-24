@@ -1309,8 +1309,14 @@ export interface components {
         XRateLimitLimit: number;
         /** @description Requests remaining in the current window. */
         XRateLimitRemaining: number;
-        /** @description Unix timestamp when the current window resets. */
+        /** @description Unix timestamp in milliseconds when the current window resets. */
         XRateLimitReset: number;
+        /** @description Current quota remaining and seconds until reset, using the IETF RateLimit structured-field syntax. */
+        RateLimit: string;
+        /** @description Named quota policy and one-minute window. */
+        RateLimitPolicy: string;
+        /** @description Seconds to wait before retrying a rate-limited request. */
+        RetryAfter: number;
     };
     pathItems: never;
 }
@@ -1328,6 +1334,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -1408,9 +1416,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1434,6 +1445,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -1517,9 +1530,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1542,6 +1558,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -1622,9 +1640,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1661,6 +1682,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -1741,9 +1764,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1769,6 +1795,8 @@ export interface operations {
             /** @description Success */
             201: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -1836,9 +1864,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1861,6 +1892,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -1939,9 +1972,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1967,6 +2003,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2039,9 +2077,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2073,6 +2114,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2145,9 +2188,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2179,6 +2225,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2241,9 +2289,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2264,6 +2315,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2341,9 +2394,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2373,6 +2429,8 @@ export interface operations {
             /** @description Success */
             201: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2435,9 +2493,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2458,6 +2519,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2530,9 +2593,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2566,6 +2632,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2630,9 +2698,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2656,6 +2727,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2720,9 +2793,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2745,6 +2821,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2811,9 +2889,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2845,6 +2926,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -2909,9 +2992,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2946,6 +3032,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3008,9 +3096,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3049,6 +3140,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3123,9 +3216,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3148,6 +3244,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3219,9 +3317,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3247,6 +3348,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3310,9 +3413,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3389,6 +3495,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3454,9 +3562,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3495,6 +3606,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3569,9 +3682,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3597,6 +3713,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3662,9 +3780,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3697,6 +3818,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3759,9 +3882,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3798,6 +3924,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3872,9 +4000,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3895,6 +4026,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -3965,9 +4098,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4043,6 +4179,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4108,9 +4246,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4134,6 +4275,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4197,9 +4340,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4236,6 +4382,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4310,9 +4458,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4336,6 +4487,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4401,9 +4554,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4424,6 +4580,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4498,9 +4656,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4533,6 +4694,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4607,9 +4770,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4634,6 +4800,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4703,9 +4871,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4731,6 +4902,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4794,9 +4967,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4820,6 +4996,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4893,9 +5071,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4925,6 +5106,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -4987,9 +5170,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5012,6 +5198,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5082,9 +5270,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5108,6 +5299,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5178,9 +5371,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5210,6 +5406,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5280,9 +5478,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5303,6 +5504,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5368,9 +5571,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5402,6 +5608,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5467,9 +5675,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5493,6 +5704,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5556,9 +5769,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5589,6 +5805,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5652,9 +5870,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5680,6 +5901,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5742,9 +5965,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5767,6 +5993,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5841,9 +6069,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5866,6 +6097,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -5938,9 +6171,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5976,6 +6212,8 @@ export interface operations {
             /** @description Accepted for asynchronous processing */
             202: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6043,9 +6281,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6069,6 +6310,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6146,9 +6389,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6181,6 +6427,8 @@ export interface operations {
             /** @description Accepted for asynchronous processing */
             202: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6246,9 +6494,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6281,6 +6532,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6346,9 +6599,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6371,6 +6627,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6440,9 +6698,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6468,6 +6729,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6530,9 +6793,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6569,6 +6835,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6638,9 +6906,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6663,6 +6934,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6737,9 +7010,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6776,6 +7052,8 @@ export interface operations {
             /** @description Success */
             201: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6846,9 +7124,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6871,6 +7152,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -6964,9 +7247,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6987,6 +7273,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7056,9 +7344,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7106,6 +7397,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7175,9 +7468,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7198,6 +7494,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7274,9 +7572,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7299,6 +7600,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7369,9 +7672,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7395,6 +7701,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7470,9 +7778,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7495,6 +7806,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7575,9 +7888,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7603,6 +7919,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7666,9 +7984,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7694,6 +8015,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7767,9 +8090,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7818,6 +8144,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7890,9 +8218,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7915,6 +8246,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -7983,9 +8316,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8008,6 +8344,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8079,9 +8417,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8107,6 +8448,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8169,9 +8512,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8209,6 +8555,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8276,9 +8624,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8301,6 +8652,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8366,9 +8719,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8402,6 +8758,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8467,9 +8825,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8493,6 +8854,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8572,9 +8935,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8606,6 +8972,8 @@ export interface operations {
             /** @description Accepted for asynchronous processing */
             202: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8671,9 +9039,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8701,6 +9072,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8768,9 +9141,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8802,6 +9178,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8869,9 +9247,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8892,6 +9273,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -8955,9 +9338,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8989,6 +9375,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9052,9 +9440,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9086,6 +9477,8 @@ export interface operations {
             /** @description Success */
             201: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9150,9 +9543,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9175,6 +9571,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9245,9 +9643,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9280,6 +9681,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9350,9 +9753,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9376,6 +9782,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9450,9 +9858,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9483,6 +9894,8 @@ export interface operations {
             /** @description Success */
             201: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9553,9 +9966,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9578,6 +9994,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9648,9 +10066,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9671,6 +10092,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9742,9 +10165,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9770,6 +10196,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9832,9 +10260,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9855,6 +10286,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -9925,9 +10358,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9958,6 +10394,8 @@ export interface operations {
             /** @description Success */
             201: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -10020,9 +10458,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -10053,6 +10494,8 @@ export interface operations {
             /** @description Success */
             200: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
@@ -10118,9 +10561,12 @@ export interface operations {
             /** @description Rate limited */
             429: {
                 headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
                     "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
                     "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
                     "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
                     [name: string]: unknown;
                 };
                 content: {

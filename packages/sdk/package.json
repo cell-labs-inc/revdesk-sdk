@@ -1,6 +1,6 @@
 {
   "name": "@revdesk/sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Official typed TypeScript client for the RevDesk v1 API.",
   "license": "MIT",
   "homepage": "https://docs.revdesk.com/api-reference/sdks",

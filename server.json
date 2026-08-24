@@ -3,8 +3,15 @@
   "name": "io.github.cell-labs-inc/revdesk-product",
   "title": "RevDesk Product MCP",
   "description": "Give AI agents secure access to RevDesk calling, SMS, phone numbers, caller IDs, and usage.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "websiteUrl": "https://www.revdesk.com/developers",
+  "icons": [
+    {
+      "src": "https://www.revdesk.com/compressed.png",
+      "mimeType": "image/png",
+      "sizes": ["1024x1024"]
+    }
+  ],
   "remotes": [
     {
       "type": "streamable-http",

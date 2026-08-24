@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "revdesk": {
+      "type": "http",
+      "url": "https://mcp.revdesk.com/mcp"
+    }
+  }
+}

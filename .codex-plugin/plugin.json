@@ -1,0 +1,37 @@
+{
+  "name": "revdesk",
+  "version": "1.0.0",
+  "description": "Build and operate RevDesk voice, messaging, phone-number, webhook, SDK, CLI, and MCP integrations.",
+  "author": {
+    "name": "Cell Labs, Inc.",
+    "email": "support@revdesk.com",
+    "url": "https://www.revdesk.com"
+  },
+  "homepage": "https://www.revdesk.com/developers",
+  "repository": "https://github.com/cell-labs-inc/revdesk-sdk",
+  "license": "MIT",
+  "keywords": ["revdesk", "voice", "sms", "phone", "api", "mcp", "sales"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "RevDesk",
+    "shortDescription": "Voice, messaging, and revenue-work tools",
+    "longDescription": "Connect Codex and ChatGPT to RevDesk's documented API and remote MCP server. Discover voice, messaging, phone-number, usage, webhook, SDK, and CLI surfaces; request least-privilege credentials; and preserve approval boundaries around actions that reach customers or incur cost.",
+    "developerName": "Cell Labs, Inc.",
+    "category": "Business & Operations",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://www.revdesk.com/developers",
+    "privacyPolicyURL": "https://www.revdesk.com/privacy",
+    "termsOfServiceURL": "https://www.revdesk.com/terms",
+    "brandColor": "#111827",
+    "composerIcon": "./assets/composer-icon.png",
+    "logo": "./assets/logo-on-light.png",
+    "logoDark": "./assets/logo-on-dark.png",
+    "screenshots": [],
+    "defaultPrompt": [
+      "Show me how to connect to the RevDesk API with the smallest required scopes",
+      "Connect my agent to the RevDesk MCP server and explain which actions need approval",
+      "Use the RevDesk SDK to inspect recent calls without changing any account data"
+    ]
+  }
+}

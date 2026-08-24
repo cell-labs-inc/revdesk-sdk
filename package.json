@@ -14,7 +14,8 @@
   "scripts": {
     "build": "bun run --filter '*' build",
     "type-check": "bun run --filter '*' type-check",
-    "gen:types": "bun run --filter '@revdesk/sdk' gen:types"
+    "gen:types": "bun run --filter '@revdesk/sdk' gen:types",
+    "validate:discovery": "node scripts/validate-discovery.mjs"
   },
   "packageManager": "bun@1.3.5",
   "engines": {

@@ -1,8 +1,18 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { parseCliArguments, runCli } from "./cli-core";
+import { CLI_VERSION, parseCliArguments, runCli } from "./cli-core";
 
 describe("RevDesk CLI", () => {
+  it("reports the published package version", async () => {
+    const stdout = vi.fn();
+
+    expect(
+      await runCli(["--version"], {}, { fetch: vi.fn<typeof fetch>(), stdout, stderr: vi.fn() })
+    ).toBe(0);
+    expect(CLI_VERSION).toBe("0.2.2");
+    expect(stdout).toHaveBeenCalledWith("0.2.2");
+  });
+
   it("parses a typed API request", () => {
     expect(parseCliArguments(["request", "post", "/v1/sms/send", "--data", '{"message":"hello"}'])).toEqual({
       kind: "request",

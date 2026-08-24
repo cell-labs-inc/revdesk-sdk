@@ -9,6 +9,8 @@ export interface CliIo {
   stderr: (value: string) => void;
 }
 
+export const CLI_VERSION = "0.2.2";
+
 export const CLI_HELP = `RevDesk CLI
 
 Usage:
@@ -92,7 +94,7 @@ export async function runCli(argv: string[], environment: CliEnvironment, io: Cl
     return 0;
   }
   if (command.kind === "version") {
-    io.stdout("0.2.0");
+    io.stdout(CLI_VERSION);
     return 0;
   }
 

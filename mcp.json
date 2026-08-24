@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "revdesk": {
+      "type": "streamable-http",
+      "url": "https://mcp.revdesk.com/mcp"
+    }
+  }
+}

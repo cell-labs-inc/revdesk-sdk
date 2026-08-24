@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "revdesk",
+  "version": "1.0.0",
+  "description": "Build and operate RevDesk voice, messaging, phone-number, SDK, CLI, agent-skill, and MCP integrations.",
+  "author": {
+    "name": "Cell Labs, Inc.",
+    "email": "support@revdesk.com",
+    "url": "https://www.revdesk.com"
+  },
+  "homepage": "https://www.revdesk.com/developers",
+  "repository": "https://github.com/cell-labs-inc/revdesk-sdk",
+  "license": "MIT",
+  "keywords": [
+    "revdesk",
+    "voice",
+    "sms",
+    "phone-numbers",
+    "api",
+    "sdk",
+    "cli",
+    "mcp",
+    "agent-skills"
+  ]
+}

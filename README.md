@@ -10,7 +10,8 @@ texts, manage phone numbers and caller trust, read usage, and manage sub-entitie
 [Documentation](https://docs.revdesk.com/api-reference/sdks) ·
 [npm package](https://www.npmjs.com/package/@revdesk/sdk) ·
 [OpenAPI schema](https://www.revdesk.com/openapi.json) ·
-[MCP server](https://docs.revdesk.com/api-reference/mcp)
+[MCP server](https://docs.revdesk.com/api-reference/mcp) ·
+[MCP registry listing](https://glama.ai/mcp/connectors/io.github.cell-labs-inc/revdesk-product)
 
 ## Install
 
@@ -29,9 +30,21 @@ await revdesk.calls.dial({ from_number: "+15551230000", to_number: "+15554560000
 
 Full docs: **https://docs.revdesk.com/api-reference/sdks**
 
+## CLI
+
+The npm package includes the official `revdesk` command, so agents and developers can inspect the
+API without writing an integration first:
+
+```bash
+npx @revdesk/sdk --help
+npx @revdesk/sdk request GET '/v1/calls?limit=10'
+```
+
 ## AI agents
 
-This repository publishes installable agent skills and a Codex plugin alongside the SDK:
+This repository publishes installable agent skills, a portable
+[Agent Plugin](https://agent-plugins.org/specification), MCP connection metadata, and a Codex plugin
+alongside the SDK:
 
 ```bash
 npx skills add cell-labs-inc/revdesk-sdk

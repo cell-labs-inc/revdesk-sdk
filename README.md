@@ -1,16 +1,20 @@
 # @revdesk/sdk
 
-The official typed TypeScript client for the [RevDesk](https://revdesk.com) v1 API — place calls and
-texts, manage phone numbers and caller trust, read usage, and manage sub-entities.
+The official typed TypeScript client for the [RevDesk](https://revdesk.com) v1 API. Connect business
+calling, messaging, phone-number operations, contacts, jobs, usage, and webhooks to the rest of your
+revenue workflow with generated types and a bundled CLI.
 
 [![npm](https://img.shields.io/npm/v/@revdesk/sdk)](https://www.npmjs.com/package/@revdesk/sdk)
 [![agent skills](https://img.shields.io/badge/agent_skills-skills.sh-111827)](https://skills.sh/cell-labs-inc/revdesk-sdk)
 
 [Developer platform](https://www.revdesk.com/developers) ·
+[RevDesk API](https://www.revdesk.com/developers/api) ·
+[Authentication](https://www.revdesk.com/developers/auth) ·
 [Documentation](https://docs.revdesk.com/api-reference/sdks) ·
 [npm package](https://www.npmjs.com/package/@revdesk/sdk) ·
 [OpenAPI schema](https://www.revdesk.com/openapi.json) ·
-[MCP server](https://docs.revdesk.com/api-reference/mcp) ·
+[MCP server](https://www.revdesk.com/developers/mcp) ·
+[CLI](https://www.revdesk.com/developers/cli) ·
 [MCP registry listing](https://glama.ai/mcp/connectors/io.github.cell-labs-inc/revdesk-product)
 
 ## Install

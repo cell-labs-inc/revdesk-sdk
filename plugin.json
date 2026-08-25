@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "revdesk",
   "version": "1.0.0",
-  "description": "Build and operate RevDesk voice, messaging, phone-number, SDK, CLI, agent-skill, and MCP integrations.",
+  "description": "Build and operate RevDesk integrations across business calling, messaging, phone numbers, contacts, jobs, usage, webhooks, SDK, CLI, agent skills, and MCP.",
   "author": {
     "name": "Cell Labs, Inc.",
     "email": "support@revdesk.com",

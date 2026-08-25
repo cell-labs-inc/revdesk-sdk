@@ -5,6 +5,8 @@ description: Connect an AI agent to RevDesk's remote MCP server, discover tools 
 
 # RevDesk MCP
 
+## When to use this skill
+
 Use this skill when a user wants an agent or MCP client to call RevDesk tools.
 
 ## Connect

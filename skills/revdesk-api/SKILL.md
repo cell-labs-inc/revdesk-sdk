@@ -5,6 +5,8 @@ description: Build or operate RevDesk API integrations with the official SDK, CL
 
 # RevDesk API
 
+## When to use this skill
+
 Use this skill when a user asks to integrate with, script, or operate the RevDesk REST API.
 
 ## Discover before acting

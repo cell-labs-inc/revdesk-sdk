@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.cell-labs-inc/revdesk-product",
   "title": "RevDesk Product MCP",
-  "description": "Give AI agents secure access to RevDesk calling, SMS, phone numbers, caller IDs, and usage.",
+  "description": "Review calls and usage, manage RevDesk phone numbers and caller IDs, send SMS, and place or end calls through scoped, approval-aware tools for AI assistants.",
   "version": "1.1.0",
   "websiteUrl": "https://www.revdesk.com/developers",
   "icons": [

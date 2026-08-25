@@ -6,6 +6,8 @@ const plugin = await readJson("plugin.json");
 const mcp = await readJson("mcp.json");
 const packageManifest = await readJson("packages/sdk/package.json");
 const cliCore = await readFile(new URL("../packages/sdk/src/cli-core.ts", import.meta.url), "utf8");
+const apiSkill = await readFile(new URL("../skills/revdesk-api/SKILL.md", import.meta.url), "utf8");
+const mcpSkill = await readFile(new URL("../skills/revdesk-mcp/SKILL.md", import.meta.url), "utf8");
 
 if (plugin.$schema !== "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json") {
   throw new Error("plugin.json must use the Agent Plugins 1.0 schema");
@@ -27,6 +29,9 @@ if (packageManifest.bin?.revdesk !== "dist/cli.js" || !packageManifest.keywords?
 }
 if (!cliCore.includes(`export const CLI_VERSION = "${packageManifest.version}"`)) {
   throw new Error("The revdesk CLI version must match @revdesk/sdk");
+}
+if (!apiSkill.includes("## When to use this skill") || !mcpSkill.includes("## When to use this skill")) {
+  throw new Error("Published RevDesk skills must include explicit when-to-use guidance");
 }
 
 console.log("RevDesk Agent Plugin, MCP, and CLI discovery metadata is valid.");

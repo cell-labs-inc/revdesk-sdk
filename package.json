@@ -2,7 +2,7 @@
   "name": "revdesk-sdk",
   "version": "0.0.0",
   "private": true,
-  "description": "Official TypeScript SDKs for RevDesk.",
+  "description": "Official TypeScript SDK and CLI for the RevDesk v1 API.",
   "license": "MIT",
   "repository": {
     "type": "git",

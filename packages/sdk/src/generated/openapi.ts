@@ -918,11 +918,7 @@ export interface paths {
         get: operations["v1_number_registrations_id_get"];
         put?: never;
         post?: never;
-        /**
-         * Cancel a number registration
-         * @description Stops the monthly charge and RevDesk's tracking for this registration. The Free Caller Registry has no un-register operation, so the number's existing registration with the analytics engines is unaffected — cancellation is a billing and monitoring stop, not a removal. No refund for the current month.
-         */
-        delete: operations["v1_number_registrations_id_delete"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -937,15 +933,11 @@ export interface paths {
         };
         /**
          * List number registrations
-         * @description Your workspace's Free Caller Registry registrations, oldest first, cursor-paged. Filter by status (pending, submitted, active, failed, cancelled) or an exact phone_number.
+         * @description RevDesk-managed Free Caller Registry status for hosted numbers in your workspace, oldest first and cursor-paged. Filter by status or an exact phone_number.
          */
         get: operations["v1_number_registrations_get"];
         put?: never;
-        /**
-         * Register phone numbers with the Free Caller Registry
-         * @description Submits US numbers to the Free Caller Registry, which feeds the analytics engines used by T-Mobile, AT&T and Verizon for spam labeling (Hiya, TNS, First Orion). Numbers hosted on RevDesk are included free; bring-your-own numbers bill $5/number per calendar month as a Number Registration line item on your invoice, starting when the registry accepts the submission. Requires an authorization attestation — you must be entitled to register these numbers for the business they belong to. Business identity defaults to your workspace's caller-trust profile; override per-request with business_identity. Async: poll GET /v1/number-registrations or subscribe to registration_submitted / registration_confirmed / registration_failed webhooks. Re-registering an already-live number is free and refreshes it.
-         */
-        post: operations["v1_number_registrations_post"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -7821,7 +7813,6 @@ export interface operations {
                             status: string;
                             source: string;
                             hosted: boolean;
-                            monthly_rate_dc: number;
                             registered_at: string | null;
                             cancelled_at: string | null;
                             created_at: string;
@@ -7836,102 +7827,6 @@ export interface operations {
                                 };
                                 last_error: string | null;
                             } | null;
-                        };
-                    };
-                };
-            };
-            /** @description Validation error */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Conflict (incl. idempotency conflicts) */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Rate limited */
-            429: {
-                headers: {
-                    RateLimit: components["headers"]["RateLimit"];
-                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
-                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
-                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
-                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
-                    "Retry-After": components["headers"]["RetryAfter"];
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-        };
-    };
-    v1_number_registrations_id_delete: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-                "Idempotency-Key"?: string;
-            };
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    RateLimit: components["headers"]["RateLimit"];
-                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
-                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
-                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
-                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            registration_id: string;
-                            status: string;
-                            cancelled_at: string | null;
                         };
                     };
                 };
@@ -8030,7 +7925,6 @@ export interface operations {
                             status: string;
                             source: string;
                             hosted: boolean;
-                            monthly_rate_dc: number;
                             registered_at: string | null;
                             cancelled_at: string | null;
                             created_at: string;
@@ -8038,134 +7932,6 @@ export interface operations {
                         meta: {
                             cursor?: string;
                             page_size: number;
-                        };
-                    };
-                };
-            };
-            /** @description Validation error */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Conflict (incl. idempotency conflicts) */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Rate limited */
-            429: {
-                headers: {
-                    RateLimit: components["headers"]["RateLimit"];
-                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
-                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
-                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
-                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
-                    "Retry-After": components["headers"]["RetryAfter"];
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-        };
-    };
-    v1_number_registrations_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
-                "Idempotency-Key"?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    phone_numbers: string[];
-                    attestation: {
-                        /** @constant */
-                        authorized_to_register: true;
-                    };
-                    business_identity?: {
-                        business_name?: string;
-                        street_address?: string;
-                        city?: string;
-                        state?: string;
-                        zip?: string;
-                        /** Format: uri */
-                        website?: string;
-                        contact_name?: string;
-                        contact_phone?: string;
-                        /** @enum {string} */
-                        call_purpose?: "attorney_legal" | "financial_service" | "first_responder" | "government" | "health" | "informational" | "pharmacy" | "political" | "real_estate" | "school_college" | "survey" | "telemarketing";
-                    };
-                    /** @enum {string} */
-                    monthly_call_volume?: "1" | "101" | "501" | "1001" | "5001" | "10001" | "50001" | "dontknow";
-                };
-            };
-        };
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    RateLimit: components["headers"]["RateLimit"];
-                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
-                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
-                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
-                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            submission_ids: string[];
-                            registrations: {
-                                registration_id: string;
-                                phone_number: string;
-                                status: string;
-                                source: string;
-                                hosted: boolean;
-                                monthly_rate_dc: number;
-                                registered_at: string | null;
-                                cancelled_at: string | null;
-                                created_at: string;
-                            }[];
                         };
                     };
                 };

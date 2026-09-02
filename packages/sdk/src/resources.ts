@@ -136,6 +136,19 @@ export class CallsResource extends Resource {
       ...options,
     });
   }
+
+  /** Save what a recipient handset displayed for a dedicated spam-label test call. */
+  recordTestResult(
+    id: string,
+    body: RequestBodyOf<"v1_calls_id_test_result_patch">,
+    options?: MutationOptions
+  ): Promise<SuccessOf<"v1_calls_id_test_result_patch">> {
+    return this.http.request<SuccessOf<"v1_calls_id_test_result_patch">>(
+      "PATCH",
+      `/v1/calls/${enc(id)}/test-result`,
+      { body, ...options }
+    );
+  }
 }
 
 /**

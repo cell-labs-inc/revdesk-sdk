@@ -33,7 +33,7 @@ export interface paths {
         };
         /**
          * List AI agents
-         * @description Returns every AI agent in the caller's active organization — the agents that answer inbound calls and power outbound campaigns. Use an agent's `id` as `agent_id` on POST /v1/calls or POST /v1/room-token.
+         * @description Returns every AI agent in the caller's active organization — the agents that answer inbound calls and lead outbound jobs. Use an agent's `id` as `agent_id` on POST /v1/calls or POST /v1/room-token.
          */
         get: operations["v1_agents_get"];
         put?: never;
@@ -664,6 +664,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/calls/{id}/test-result": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Record a spam-label test result
+         * @description Records what a recipient handset displayed for a call placed through the spam-label test endpoint. Only calls already marked as spam-label tests can be annotated.
+         */
+        patch: operations["v1_calls_id_test_result_patch"];
+        trace?: never;
+    };
     "/v1/calls/{id}/transcript": {
         parameters: {
             query?: never;
@@ -808,8 +828,9 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Retrieve a job
-         * @description The job, every band of its provenance timeline in order, and each recorded outcome with the interactions that produced it.
+         * Retrieve a task (legacy path)
+         * @deprecated
+         * @description Deprecated compatibility alias for `GET /v1/tasks/{taskId}`. Returns the task, its provenance timeline, and recorded outcomes with evidence.
          */
         get: operations["v1_jobs_jobId_get"];
         put?: never;
@@ -828,16 +849,62 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * List jobs
-         * @description Jobs the organization has open or has completed, newest first. Filter with `status` (OPEN, PAUSED, ACHIEVED, ABANDONED, EXPIRED).
+         * List tasks (legacy path)
+         * @deprecated
+         * @description Deprecated compatibility alias for `GET /v1/tasks`. Tasks are returned newest first and may be filtered with `status` (OPEN, PAUSED, ACHIEVED, ABANDONED, EXPIRED).
          */
         get: operations["v1_jobs_get"];
         put?: never;
         /**
-         * Create a job
-         * @description Hand RevDesk an outcome to pursue. The agent plans and executes across channels until the success criteria are met, the deadline passes, or the guardrails stop it. Progress and the terminal outcome arrive on the JOB_* webhooks.
+         * Create a task (legacy path)
+         * @deprecated
+         * @description Deprecated compatibility alias for `POST /v1/tasks`. Hand RevDesk an outcome to pursue; progress and the terminal outcome arrive through task webhooks.
          */
         post: operations["v1_jobs_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tasks/{taskId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Retrieve a task
+         * @description The task, every band of its provenance timeline in order, and each recorded outcome with the interactions that produced it.
+         */
+        get: operations["v1_tasks_taskId_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tasks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List tasks
+         * @description Tasks the organization has open or has completed, newest first. Filter with `status` (OPEN, PAUSED, ACHIEVED, ABANDONED, EXPIRED).
+         */
+        get: operations["v1_tasks_get"];
+        put?: never;
+        /**
+         * Create a task
+         * @description Hand RevDesk an outcome to pursue. The coworker plans and executes across channels until the success criteria are met, the deadline passes, or the guardrails stop it.
+         */
+        post: operations["v1_tasks_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -897,7 +964,12 @@ export interface paths {
          */
         get: operations["v1_messages_get"];
         put?: never;
-        post?: never;
+        /**
+         * Send an SMS to a contact
+         * @deprecated
+         * @description Sends an outbound SMS to the given number from your organization's default sending number, creating the contact if it does not exist. Superseded by POST /v1/sms/send, which lets you pick the sending number explicitly.
+         */
+        post: operations["v1_messages_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1074,6 +1146,30 @@ export interface paths {
          * @description Issues a single-call token for browser calling where RevDesk places the call and your browser joins it. You provide a caller ID (from_number, which must be a number you own) and a destination (to_number); RevDesk dials the destination and returns a token your browser uses to join the live call and talk through the mic. Nothing about the underlying network is exposed to the browser. The connection runs entirely on RevDesk's own infrastructure. Pass the returned token and room_url to the RevDesk browser SDK (@revdesk/webrtc) to join.
          */
         post: operations["v1_room_token_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sandbox": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Inspect the zero-auth synthetic sandbox
+         * @description Returns supported sample operations for a non-production environment. This endpoint never reads tenant data or performs external side effects.
+         */
+        get: operations["v1_sandbox_get"];
+        put?: never;
+        /**
+         * Exercise a synthetic RevDesk operation
+         * @description Accepts a representative operation and returns deterministic sample output. Calls, messages, contacts, billing, and tenant records are never created or changed.
+         */
+        post: operations["v1_sandbox_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1276,6 +1372,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/phone-numbers/{id}/test-call": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Place a spam-label test call
+         * @description Calls a US or Canadian mobile phone from one specific owned number so the recipient can record the carrier label shown on screen. The number must be active and assigned to an AI agent.
+         */
+        post: operations["v1_phone_numbers_id_test_call_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1309,6 +1425,8 @@ export interface components {
         RateLimitPolicy: string;
         /** @description Seconds to wait before retrying a rate-limited request. */
         RetryAfter: number;
+        /** @description Bearer challenge with RFC 9728 protected-resource metadata and, on scope failures, the required scope. */
+        WWWAuthenticate: string;
     };
     pathItems: never;
 }
@@ -1372,6 +1490,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1381,6 +1500,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1486,6 +1606,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1495,6 +1616,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1596,6 +1718,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1605,6 +1728,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1720,6 +1844,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1729,6 +1854,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1820,6 +1946,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1829,6 +1956,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1928,6 +2056,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -1937,6 +2066,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2033,6 +2163,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2042,6 +2173,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2144,6 +2276,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2153,6 +2286,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2245,6 +2379,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2254,6 +2389,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2350,6 +2486,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2359,6 +2496,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2449,6 +2587,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2458,6 +2597,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2549,6 +2689,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2558,6 +2699,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2654,6 +2796,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2663,6 +2806,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2749,6 +2893,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2758,6 +2903,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2845,6 +2991,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2854,6 +3001,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2948,6 +3096,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -2957,6 +3106,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3052,6 +3202,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3061,6 +3212,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3172,6 +3324,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3181,6 +3334,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3273,6 +3427,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3282,6 +3437,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3369,6 +3525,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3378,6 +3535,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3518,6 +3676,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3527,6 +3686,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3638,6 +3798,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3647,6 +3808,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3736,6 +3898,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3745,6 +3908,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3838,6 +4002,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3847,6 +4012,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3956,6 +4122,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -3965,6 +4132,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4054,6 +4222,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4063,6 +4232,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4202,6 +4372,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4211,6 +4382,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4296,6 +4468,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4305,6 +4478,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4414,6 +4588,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4423,6 +4598,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4510,6 +4686,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4519,6 +4696,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4612,6 +4790,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4621,6 +4800,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4726,6 +4906,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4735,6 +4916,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4827,6 +5009,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4836,6 +5019,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4923,6 +5107,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -4932,6 +5117,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5027,6 +5213,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5036,6 +5223,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5126,6 +5314,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5135,6 +5324,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5226,6 +5416,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5235,6 +5426,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5327,6 +5519,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5336,6 +5529,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5434,6 +5628,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5443,6 +5638,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5527,6 +5723,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5536,6 +5733,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5631,6 +5829,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5640,6 +5839,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5725,6 +5925,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5734,6 +5935,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5826,6 +6028,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5835,6 +6038,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5921,6 +6125,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -5930,6 +6135,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6009,6 +6215,16 @@ export interface operations {
                             has_recording: boolean;
                             recording_url: string | null;
                             has_transcript: boolean;
+                            source: string | null;
+                            client_name: string | null;
+                            client_label: string | null;
+                            credential_type: string | null;
+                            test_result: {
+                                /** @enum {string} */
+                                outcome: "BUSINESS_NAME" | "LOCATION" | "NUMBER_ONLY" | "SPAM" | "NO_CALL";
+                                observed_label: string;
+                                recorded_at: string;
+                            } | null;
                         };
                     };
                 };
@@ -6025,6 +6241,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6034,6 +6251,116 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_calls_id_test_result_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    outcome: "BUSINESS_NAME" | "LOCATION" | "NUMBER_ONLY" | "SPAM" | "NO_CALL";
+                    /** @default  */
+                    observed_label: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_id: string;
+                            /** @enum {string} */
+                            outcome: "BUSINESS_NAME" | "LOCATION" | "NUMBER_ONLY" | "SPAM" | "NO_CALL";
+                            observed_label: string;
+                            recorded_at: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6127,6 +6454,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6136,6 +6464,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6197,6 +6526,8 @@ export interface operations {
                     record: boolean;
                     /** @default false */
                     amd: boolean;
+                    client_name?: string;
+                    client_label?: string;
                 };
             };
         };
@@ -6237,6 +6568,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6246,6 +6578,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6324,6 +6657,16 @@ export interface operations {
                             has_recording: boolean;
                             recording_url: string | null;
                             has_transcript: boolean;
+                            source: string | null;
+                            client_name: string | null;
+                            client_label: string | null;
+                            credential_type: string | null;
+                            test_result: {
+                                /** @enum {string} */
+                                outcome: "BUSINESS_NAME" | "LOCATION" | "NUMBER_ONLY" | "SPAM" | "NO_CALL";
+                                observed_label: string;
+                                recorded_at: string;
+                            } | null;
                         }[];
                         meta: {
                             cursor?: string;
@@ -6345,6 +6688,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6354,6 +6698,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6450,6 +6795,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6459,6 +6805,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6555,6 +6902,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6564,6 +6912,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6654,6 +7003,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6663,6 +7013,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6749,6 +7100,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6758,6 +7110,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6862,6 +7215,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6871,6 +7225,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6966,6 +7321,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -6975,6 +7331,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7080,6 +7437,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7089,6 +7447,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7203,6 +7562,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7212,6 +7572,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7300,6 +7661,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7309,6 +7671,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7424,6 +7787,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7433,6 +7797,357 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_tasks_taskId_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                taskId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            type: string;
+                            status: string;
+                            objective: string;
+                            contact_id: string | null;
+                            deadline: string | null;
+                            created_at: string;
+                            closed_at: string | null;
+                            events: {
+                                seq: number;
+                                occurred_at: string;
+                                row_type: string;
+                                actor: string | null;
+                                channel: string | null;
+                                system: string | null;
+                                body: string;
+                            }[];
+                            outcomes: {
+                                id: string;
+                                kind: string;
+                                occurred_at: string;
+                                value: number | null;
+                                billable: boolean;
+                                billed_at: string | null;
+                                billed_amount: number | null;
+                                attribution_mode: string;
+                                disputed_at: string | null;
+                                evidence: {
+                                    interaction_type: string;
+                                    interaction_id: string;
+                                    note: string | null;
+                                }[];
+                            }[];
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_tasks_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            type: string;
+                            status: string;
+                            objective: string;
+                            contact_id: string | null;
+                            opportunity_id: string | null;
+                            deadline: string | null;
+                            created_at: string;
+                            closed_at: string | null;
+                        }[];
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_tasks_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    type: string;
+                    objective: string;
+                    contact_id?: string;
+                    opportunity_id?: string;
+                    deadline?: unknown;
+                    success_criteria?: {
+                        outcome_kinds?: string[];
+                    };
+                    guardrails?: {
+                        channels?: string[];
+                        quiet_hours?: {
+                            from: number;
+                            to: number;
+                            time_zone?: string;
+                        };
+                        max_touches?: number;
+                        max_touches_since_reply?: number;
+                        min_hours_between_touches?: number;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            id: string;
+                            type: string;
+                            status: string;
+                            objective: string;
+                            contact_id: string | null;
+                            opportunity_id: string | null;
+                            deadline: string | null;
+                            created_at: string;
+                            closed_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7528,6 +8243,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7537,6 +8253,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7628,6 +8345,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7637,6 +8355,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7734,6 +8453,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7743,6 +8463,112 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_messages_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    phone_number: string;
+                    message: string;
+                    name?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            sent: boolean;
+                            message_id: string;
+                            contact_token: string;
+                            phone_number: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7843,6 +8669,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7852,6 +8679,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7948,6 +8776,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -7957,6 +8786,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8046,6 +8876,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8055,6 +8886,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8147,6 +8979,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8156,6 +8989,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8242,6 +9076,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8251,6 +9086,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8354,6 +9190,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8363,6 +9200,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8449,6 +9287,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8458,6 +9297,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8555,6 +9395,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8564,6 +9405,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8665,6 +9507,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8674,6 +9517,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8769,6 +9613,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8778,6 +9623,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8871,6 +9717,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8880,6 +9727,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8937,6 +9785,8 @@ export interface operations {
                     from_number: string;
                     to_number: string;
                     ttl_seconds?: number;
+                    client_name?: string;
+                    client_label?: string;
                 };
             };
         };
@@ -8977,6 +9827,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -8986,6 +9837,212 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sandbox_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @constant */
+                        environment: "sandbox";
+                        /** @constant */
+                        production_data: false;
+                        /** @constant */
+                        authentication_required: false;
+                        operations: ("list_calls" | "create_contact" | "send_sms" | "place_call")[];
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_sandbox_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    operation: "list_calls" | "create_contact" | "send_sms" | "place_call";
+                    /** @default {} */
+                    input: {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @constant */
+                        environment: "sandbox";
+                        /** @constant */
+                        production_data: false;
+                        /** @constant */
+                        performed: false;
+                        /** @enum {string} */
+                        operation: "list_calls" | "create_contact" | "send_sms" | "place_call";
+                        synthetic_result: {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9068,6 +10125,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9077,6 +10135,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9170,6 +10229,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9179,6 +10239,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9273,6 +10334,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9282,6 +10344,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9373,6 +10436,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9382,6 +10446,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9483,6 +10548,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9492,6 +10558,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9588,6 +10655,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9597,6 +10665,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9696,6 +10765,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9705,6 +10775,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9796,6 +10867,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9805,6 +10877,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9895,6 +10968,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9904,6 +10978,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9990,6 +11065,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -9999,6 +11075,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -10088,6 +11165,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -10097,6 +11175,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -10188,6 +11267,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -10197,6 +11277,7 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -10253,6 +11334,8 @@ export interface operations {
                 "application/json": {
                     from_number: string;
                     to_number: string;
+                    client_name?: string;
+                    client_label?: string;
                 };
             };
         };
@@ -10291,6 +11374,7 @@ export interface operations {
             /** @description Unauthorized */
             401: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {
@@ -10300,6 +11384,113 @@ export interface operations {
             /** @description Forbidden */
             403: {
                 headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict (incl. idempotency conflicts) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    "Retry-After": components["headers"]["RetryAfter"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    v1_phone_numbers_id_test_call_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    destination_number: string;
+                    client_name?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Accepted for asynchronous processing */
+            202: {
+                headers: {
+                    RateLimit: components["headers"]["RateLimit"];
+                    "RateLimit-Policy": components["headers"]["RateLimitPolicy"];
+                    "X-RateLimit-Limit": components["headers"]["XRateLimitLimit"];
+                    "X-RateLimit-Remaining": components["headers"]["XRateLimitRemaining"];
+                    "X-RateLimit-Reset": components["headers"]["XRateLimitReset"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            call_id: string;
+                            status: string;
+                            from_number: string;
+                            to_number: string;
+                        };
+                    };
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    "WWW-Authenticate": components["headers"]["WWWAuthenticate"];
                     [name: string]: unknown;
                 };
                 content: {

@@ -1527,7 +1527,7 @@ export interface paths {
         put?: never;
         /**
          * Create a task
-         * @description Hand RevDesk an outcome to pursue. The coworker plans and executes across channels until the success criteria are met, the deadline passes, or the guardrails stop it.
+         * @description Hand RevDesk an outcome to pursue. The agent plans and executes across channels until the success criteria are met, the deadline passes, or the guardrails stop it.
          */
         post: operations["v1_tasks_post"];
         delete?: never;

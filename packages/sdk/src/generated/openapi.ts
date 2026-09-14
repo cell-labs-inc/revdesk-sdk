@@ -2150,6 +2150,8 @@ export interface operations {
             header?: {
                 /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
                 "Idempotency-Key"?: string;
+                /** @description Optional end-user IPv4 or IPv6 address reported by your server for the browser caller. Stored as client-reported diagnostics, separately from the API request IP; never used for authentication. Raw IPs expire after 30 days. */
+                "X-Revdesk-Caller-IP"?: string;
             };
             path: {
                 id: string;
@@ -6474,6 +6476,36 @@ export interface operations {
                                 recorded_at: string;
                                 callback_verified: boolean;
                             } | null;
+                            created_at: string;
+                            failure_code: string | null;
+                            failure_category: string | null;
+                            disconnection_reason: string | null;
+                            network: {
+                                /** Format: date-time */
+                                capturedAt: string;
+                                caller: {
+                                    /** @enum {string} */
+                                    kind: "browser" | "phone" | "agent" | "unknown";
+                                    ip: (string) | null;
+                                    /** @enum {string} */
+                                    ipSource: "request" | "client_reported" | "unavailable" | "expired";
+                                    userId: string | null;
+                                };
+                                callee: {
+                                    /** @enum {string} */
+                                    kind: "browser" | "phone" | "agent" | "unknown";
+                                    ip: (string) | null;
+                                    /** @enum {string} */
+                                    ipSource: "request" | "client_reported" | "unavailable" | "expired";
+                                    userId: string | null;
+                                };
+                                requester: {
+                                    ip: (string) | null;
+                                    /** @enum {string} */
+                                    kind: "app" | "api";
+                                    userId: string | null;
+                                } | null;
+                            } | null;
                         };
                     };
                 };
@@ -6929,6 +6961,37 @@ export interface operations {
                                 observed_label: string;
                                 recorded_at: string;
                                 callback_verified: boolean;
+                            } | null;
+                            created_at: string;
+                            user_id: string | null;
+                            failure_code: string | null;
+                            failure_category: string | null;
+                            disconnection_reason: string | null;
+                            network: {
+                                /** Format: date-time */
+                                capturedAt: string;
+                                caller: {
+                                    /** @enum {string} */
+                                    kind: "browser" | "phone" | "agent" | "unknown";
+                                    ip: (string) | null;
+                                    /** @enum {string} */
+                                    ipSource: "request" | "client_reported" | "unavailable" | "expired";
+                                    userId: string | null;
+                                };
+                                callee: {
+                                    /** @enum {string} */
+                                    kind: "browser" | "phone" | "agent" | "unknown";
+                                    ip: (string) | null;
+                                    /** @enum {string} */
+                                    ipSource: "request" | "client_reported" | "unavailable" | "expired";
+                                    userId: string | null;
+                                };
+                                requester: {
+                                    ip: (string) | null;
+                                    /** @enum {string} */
+                                    kind: "app" | "api";
+                                    userId: string | null;
+                                } | null;
                             } | null;
                         }[];
                         meta: {
@@ -11379,6 +11442,8 @@ export interface operations {
             header?: {
                 /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
                 "Idempotency-Key"?: string;
+                /** @description Optional end-user IPv4 or IPv6 address reported by your server for the browser caller. Stored as client-reported diagnostics, separately from the API request IP; never used for authentication. Raw IPs expire after 30 days. */
+                "X-Revdesk-Caller-IP"?: string;
             };
             path?: never;
             cookie?: never;
@@ -13279,6 +13344,8 @@ export interface operations {
             header?: {
                 /** @description UUID — when present, deduplicates repeat submissions. See /api-reference/idempotency. */
                 "Idempotency-Key"?: string;
+                /** @description Optional end-user IPv4 or IPv6 address reported by your server for the browser caller. Stored as client-reported diagnostics, separately from the API request IP; never used for authentication. Raw IPs expire after 30 days. */
+                "X-Revdesk-Caller-IP"?: string;
             };
             path?: never;
             cookie?: never;

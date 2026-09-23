@@ -1,12 +1,12 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, mock } from "bun:test";
 
 import { CLI_VERSION, parseCliArguments, runCli } from "./cli-core";
 
 describe("RevDesk CLI", () => {
   it("reports the published package version", async () => {
-    const stdout = vi.fn();
+    const stdout = mock();
 
-    expect(await runCli(["--version"], {}, { fetch: vi.fn<typeof fetch>(), stdout, stderr: vi.fn() })).toBe(
+    expect(await runCli(["--version"], {}, { fetch: mock<typeof fetch>() as unknown as typeof fetch, stdout, stderr: mock() })).toBe(
       0
     );
     expect(CLI_VERSION).toBe("0.2.2");
@@ -23,19 +23,19 @@ describe("RevDesk CLI", () => {
   });
 
   it("sends the API key only in the Authorization header and prints formatted JSON", async () => {
-    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+    const fetchMock = mock<typeof fetch>().mockResolvedValue(
       new Response(JSON.stringify({ data: { id: "call_123" } }), {
         status: 202,
         headers: { "Content-Type": "application/json" },
       })
     );
-    const stdout = vi.fn();
-    const stderr = vi.fn();
+    const stdout = mock();
+    const stderr = mock();
 
     const exitCode = await runCli(
       ["request", "POST", "/v1/calls/dial", "--data", '{"to_number":"+14155550100"}'],
       { REVDESK_API_KEY: "rv_test_secret" },
-      { fetch: fetchMock, stdout, stderr }
+      { fetch: fetchMock as unknown as typeof fetch, stdout, stderr }
     );
 
     expect(exitCode).toBe(0);
@@ -51,15 +51,15 @@ describe("RevDesk CLI", () => {
   });
 
   it("requires an API key before making a request", async () => {
-    const fetchMock = vi.fn<typeof fetch>();
-    const stderr = vi.fn();
+    const fetchMock = mock<typeof fetch>();
+    const stderr = mock();
 
     const exitCode = await runCli(
       ["request", "GET", "/v1/me"],
       {},
       {
-        fetch: fetchMock,
-        stdout: vi.fn(),
+        fetch: fetchMock as unknown as typeof fetch,
+        stdout: mock(),
         stderr,
       }
     );

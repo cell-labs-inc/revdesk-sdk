@@ -1,10 +1,10 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, mock } from "bun:test";
 
 import { HttpClient } from "./http";
 
 describe("HttpClient error envelopes", () => {
   it("exposes API resolution guidance on RevDeskError", async () => {
-    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+    const fetchMock = mock<typeof fetch>().mockResolvedValue(
       new Response(
         JSON.stringify({
           error: {
@@ -17,7 +17,7 @@ describe("HttpClient error envelopes", () => {
         { status: 404, headers: { "x-request-id": "req_123" } }
       )
     );
-    const client = new HttpClient({ apiKey: "rv_test", fetch: fetchMock });
+    const client = new HttpClient({ apiKey: "rv_test", fetch: fetchMock as unknown as typeof fetch });
 
     await expect(client.request("GET", "/v1/does-not-exist")).rejects.toMatchObject({
       name: "RevDeskError",
